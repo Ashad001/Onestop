@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm
+from .forms import AdministrationLoginForm, StudentForm
 from django.contrib import messages
+from django import forms
 # Create your views here.
 
 
@@ -14,8 +15,12 @@ def page_not_found_404(request, exception, message=None):
         status=404,
     )
 
+
 def dashboard(request):
-    return HttpResponse("DASHBOARD")
+    return render(
+        request,
+        "Onestop_App/admin_dashboard.html"
+    )
 
 
 def admin_login(request):
@@ -39,7 +44,8 @@ def admin_login(request):
                     },
                 )
         else:
-            messages.error(request, "Invalid email and/or password or submission.")
+            messages.error(
+                request, "Invalid email and/or password or submission.")
             return render(
                 request,
                 "Onestop_App/admin_login.html",
@@ -61,3 +67,35 @@ def admin_logout(request):
     return redirect("Onestop_App:admin_login")
 
 
+def add_student(request):
+    if request.method == "POST":
+        student_Form = StudentForm(request.POST)
+        if student_Form.is_valid():
+            try:
+                student_Form.save()
+                messages.success(
+                    request, "Student profile successfully created"
+                )
+            except forms.ValidationError as e:
+                messages.error(request, "Integrity Error " + str(e))
+
+            return render(
+                request,
+                "Onestop_App/add_student.html",
+                {"student_Form": StudentForm(), },
+            )
+        else:
+            # print(instanceForm.errors)
+            messages.error(request, "Something is not quiite right (。_。)")
+
+            return render(
+                request,
+                "Onestop_App/add_student.html",
+                {"student_Form": student_Form, },
+            )
+    else:
+        return render(
+            request,
+            "Onestop_App/add_student.html",
+            {"student_Form": StudentForm(), },
+        )

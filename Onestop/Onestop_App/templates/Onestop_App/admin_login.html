@@ -210,33 +210,6 @@
         errorMessages.forEach((errorMessage) => errorMessage.parentNode.removeChild(errorMessage))
       }
       
-      // Function to validate the form before submission
-      {% comment %} function validateForm() {
-        clearErrors() // Clear existing error messages
-      
-        const emailInput = document.getElementById('email')
-        const passwordInput = document.getElementById('password')
-      
-        // Check if email and password meet hamara validation criteria
-        if (!isValidEmail(emailInput.value)) {
-          showError('email', 'Invalid email address make sure domain is @nu.edu.pk')
-          return false
-        }
-      
-        if (passwordInput.value.length < 6) {
-          showError('password', 'Password must be at least 8 characters')
-          return false
-        }
-      
-        return true
-      } {% endcomment %}
-      
-      // Function to check if the email is valid
-      {% comment %} function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@nu\.edu\.pk$/
-        return emailRegex.test(email)
-      }
-       {% endcomment %}
       window.onload = function () {
         // Check if dark mode preference is stored in localStorage
         const darkMode = localStorage.getItem('darkMode') === 'enabled'
@@ -247,7 +220,6 @@
         setLogoImage(darkMode)
       
         // Add form submission event listener
-        
       }
     </script>
   </head>
