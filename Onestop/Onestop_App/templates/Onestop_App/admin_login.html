@@ -1,0 +1,279 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Login | OneStop
+      {% endblock %}
+    </title>
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        transition: background-color 0.3s;
+      }
+      
+      body.dark-mode {
+        background-color: #333; /* Dark mode background color */
+        color: #fff; /* Dark mode text color */
+      }
+      
+      header {
+        text-align: left;
+        color: #007bff;
+        margin-bottom: 20px;
+        margin-left: 20px;
+      }
+      
+      img {
+        max-width: 150px;
+        margin-bottom: 10px;
+        display: block;
+        margin-left: 35px;
+      }
+      
+      h1,
+      p {
+        font-size: 32px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+      }
+      
+      .sub-heading {
+        font-size: 18px;
+        color: #555;
+        margin-left: 10px;
+      }
+      
+      .animated-word {
+        font-size: 14px;
+        display: inline-block;
+        animation: bounce 2s infinite;
+        background-image: linear-gradient(to right, #007bff, #0056b3);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+      }
+      
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+      }
+      
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      
+      h3 {
+        text-align: center;
+        color: #333;
+      }
+      
+      body.dark-mode h2 {
+        color: #fff; /* Text color in dark mode */
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        color: #555;
+      }
+      
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #333;
+        transition: box-shadow 0.3s;
+      }
+      
+      input::placeholder {
+        color: #ccc;
+      }
+      
+      input:focus::placeholder {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+      
+      button:hover {
+        background-color: #0056b3;
+      }
+      
+      .register-link {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+        color: #007bff;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-5px);
+        }
+        60% {
+          transform: translateY(-3px);
+        }
+      }
+      .error-message {
+        color: #ff0000;
+        font-size: 14px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+    </style>
+    <script>
+      function toggleDarkMode() {
+        const body = document.body
+        const darkMode = body.classList.contains('dark-mode')
+      
+        // Toggle dark mode class
+        body.classList.toggle('dark-mode', !darkMode)
+      
+        // Store the user's dark mode preference in localStorage
+        localStorage.setItem('darkMode', !darkMode ? 'enabled' : 'disabled')
+      
+        setLogoImage(!darkMode)
+      }
+      
+      function setLogoImage(isDarkMode) {
+        const logoImg = document.getElementById('logo-image')
+        console.log(logoImg)
+        logoImg.src = isDarkMode
+          ? 'https://drive.google.com/uc?id=1DBXfLGIhCX7mTP782TS0u6OgAgx5jLYY' // dark mode logo URL
+          : 'https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes' // regular logo URL
+      }
+      
+      // Function to show an error message next to an input field
+      function showError(inputId, message) {
+        const inputElement = document.getElementById(inputId)
+        const errorMessageElement = document.createElement('div')
+        errorMessageElement.className = 'error-message'
+        errorMessageElement.textContent = message
+      
+        // Remove existing error message if any
+        const existingErrorMessage = inputElement.nextSibling
+        if (existingErrorMessage && existingErrorMessage.className === 'error-message') {
+          inputElement.parentNode.removeChild(existingErrorMessage)
+        }
+      
+        // Append the new error message
+        inputElement.parentNode.insertBefore(errorMessageElement, inputElement.nextSibling)
+      }
+      
+      // Function to remove error messages
+      function clearErrors() {
+        const errorMessages = document.querySelectorAll('.error-message')
+        errorMessages.forEach((errorMessage) => errorMessage.parentNode.removeChild(errorMessage))
+      }
+      
+      // Function to validate the form before submission
+      {% comment %} function validateForm() {
+        clearErrors() // Clear existing error messages
+      
+        const emailInput = document.getElementById('email')
+        const passwordInput = document.getElementById('password')
+      
+        // Check if email and password meet hamara validation criteria
+        if (!isValidEmail(emailInput.value)) {
+          showError('email', 'Invalid email address make sure domain is @nu.edu.pk')
+          return false
+        }
+      
+        if (passwordInput.value.length < 6) {
+          showError('password', 'Password must be at least 8 characters')
+          return false
+        }
+      
+        return true
+      } {% endcomment %}
+      
+      // Function to check if the email is valid
+      {% comment %} function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@nu\.edu\.pk$/
+        return emailRegex.test(email)
+      }
+       {% endcomment %}
+      window.onload = function () {
+        // Check if dark mode preference is stored in localStorage
+        const darkMode = localStorage.getItem('darkMode') === 'enabled'
+      
+        // Toggle dark mode based on preference
+        document.body.classList.toggle('dark-mode', darkMode)
+      
+        setLogoImage(darkMode)
+      
+        // Add form submission event listener
+        
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <img id="logo-image" src="https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes" alt="OneStop Logo" />
+      <h1>Welcome To</h1>
+      <h2 class="sub-heading">Students OneStop <span class="animated-word">Digitalized</span></h2>
+    </header>
+    <div style="width:20rem">
+      <form action="{% url 'Onestop_App:admin_login' %}" method="POST">
+        {% csrf_token %}
+        <h3>Login</h3>
+        <label for="email">Email:</label>
+        {% comment %} <input type="email" id="email" name="email" required placeholder="xxx@nu.edu.pk" /> {% endcomment %}
+        {{ login_form.username }}
+        <label for="password">Password:</label>
+        {% comment %} <input type="password" id="password" name="password" required placeholder="******" /> {% endcomment %}
+        {{ login_form.password }}
+        {% if login_form.errors %}
+          <div class="alert alert-warning" style="font-size: 0.8rem;" role="alert">{{ login_form.errors }}</div>
+        {% endif %}
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+
+    <div style="position: fixed; top: 20px; right: 20px; cursor: pointer; font-size: 18px;" onclick="toggleDarkMode()">🌙</div>
+  </body>
+</html>
