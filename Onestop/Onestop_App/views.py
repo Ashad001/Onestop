@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm, StudentForm
+from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm
 from django.contrib import messages
 from django import forms
 # Create your views here.
@@ -85,7 +85,6 @@ def add_student(request):
                 {"student_Form": StudentForm(), },
             )
         else:
-            # print(instanceForm.errors)
             messages.error(request, "Something is not quiite right (。_。)")
 
             return render(
@@ -98,4 +97,69 @@ def add_student(request):
             request,
             "Onestop_App/add_student.html",
             {"student_Form": StudentForm(), },
+        )
+
+
+def add_faculty(request):
+    if request.method == "POST":
+        faculty_Form = FacultyForm(request.POST)
+        if faculty_Form.is_valid():
+            try:
+                faculty_Form.save()
+                messages.success(
+                    request, "Faculty profile successfully created"
+                )
+            except forms.ValidationError as e:
+                messages.error(request, "Integrity Error: " + str(e))
+
+            return render(
+                request,
+                "Onestop_App/add_faculty.html",
+                {"faculty_Form": FacultyForm(), },
+            )
+        else:
+            messages.error(request, "Something is not quite right (。_。)")
+            
+            return render(
+                request,
+                "Onestop_App/add_faculty.html",
+                {"faculty_Form": FacultyForm(), },
+            )
+    else:
+        return render(
+            request,
+            "Onestop_App/add_faculty.html",
+            {"faculty_Form": FacultyForm(),},
+        )
+    
+def add_course(request):
+    if request.method=="POST":
+        course_Form = CourseForm(request.POST)
+        if course_Form.is_valid():
+            try:
+                course_Form.save()
+                messages.success(
+                    request, "Course successfully created"
+                )
+            except forms.ValidationError as e:
+                messages.error(request, "Integrity Error: " + str(e))
+            
+            return render(
+                request,
+                "Onestop_App/add_course.html",
+                {"course_Form": CourseForm(), },
+            )
+        else:
+            messages.error(request, "Something is not quite right (。_。)")
+            
+            return render(
+                request,
+                "Onestop_App/add_course.html",
+                {"course_Form": CourseForm(), },
+            )
+    else:
+        return render(
+            request,
+            "Onestop_App/add_course.html",
+            {"course_Form": CourseForm(), },
         )

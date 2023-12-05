@@ -20,7 +20,9 @@ class Section(models.Model):
     class Meta:
         verbose_name = "Section"
         verbose_name_plural = "Section"
-
+        
+    def __str__(self):
+        return self.name
 
 class Student(models.Model):
     Major_Choices = [
@@ -44,6 +46,9 @@ class Student(models.Model):
     class Meta:
         verbose_name = "Student"
         verbose_name_plural = "Students"
+        
+    def __str__(self):
+        return self.nuid
 
 
 class Course(models.Model):
@@ -55,17 +60,23 @@ class Course(models.Model):
     class Meta:
         verbose_name = "Course"
         verbose_name_plural = "Courses"
+        
+    def __str__(self):
+        return self.course_id
 
 
 class Faculty(models.Model):
-    section = models.ForeignKey(
-        Section, on_delete=models.CASCADE, related_name="faculty")
-    course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, related_name="faculty")
+    name = models.CharField(max_length=30, unique=False,
+                            null=False, default='None')
+    section = models.ManyToManyField(Section, related_name="faculty")
+    course = models.ManyToManyField(Course, related_name="faculty")
 
     class Meta:
         verbose_name = "Faculty"
         verbose_name_plural = "Faculties"
+    
+    def __str__(self):
+        return self.name
 
 
 class Appointment(models.Model):
@@ -85,6 +96,8 @@ class Appointment(models.Model):
         verbose_name = "Appointment"
         verbose_name_plural = "Appointments"
 
+    def __str__(self):
+        return self.student.nuid | self.status
 
 class Ticket(models.Model):
     STATUS_CHOICES = [
@@ -112,6 +125,8 @@ class Ticket(models.Model):
         verbose_name = "Ticket"
         verbose_name_plural = "Tickets"
 
+    def __str__(self):
+        return self.service | self.status
 
 class Notification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -122,6 +137,9 @@ class Notification(models.Model):
     class Meta:
         verbose_name = "Notification"
         verbose_name_plural = "Notifications"
+        
+    def __str__(self):
+        return self.status
 
 
 class Report(models.Model):
@@ -133,3 +151,6 @@ class Report(models.Model):
     class Meta:
         verbose_name = "Report"
         verbose_name_plural = "Reports"
+        
+    def __str__(self):
+        return self.user.username

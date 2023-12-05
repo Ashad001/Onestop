@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from Onestop_App.models import User, Student, Faculty, Section
+from Onestop_App.models import User, Student, Faculty, Section, Course
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
@@ -9,6 +9,7 @@ class AdministrationLoginForm(AuthenticationForm):
     It's just an authentication form.
     """
     pass
+
 
 class StudentForm(forms.ModelForm):
     """
@@ -109,8 +110,9 @@ class StudentForm(forms.ModelForm):
             username=self.cleaned_data["username"]
         ).first()
         if existing_user:
-            raise forms.ValidationError("A user with this username already exists.")
-        
+            raise forms.ValidationError(
+                "A user with this username already exists.")
+
         # Create and associate a user with the student
         user = User(
             username=self.cleaned_data["username"],
@@ -153,5 +155,103 @@ class StudentForm(forms.ModelForm):
                 "username",
                 "Username must be in the format 'k' + batch + nuid. You may have entered wrong batch/nuid",
             )
+
+        return cleaned_data
+
+
+class FacultyForm(forms.ModelForm):
+    name = forms.CharField(
+        label="Name",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter your first name",
+                "autocomplete": "first-name",
+                "max_length": 150,
+            }
+        ),
+        required=True,
+    )
+    section = forms.ModelMultipleChoiceField(
+        queryset=Section.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                "placeholder": "Select your section",
+                "autocomplete": "section",
+                "max_length": 150,
+            }
+        ),
+        required=True,
+    )
+    course = forms.ModelMultipleChoiceField(
+        queryset=Course.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                "placeholder": "Select your course",
+                "autocomplete": "course",
+                "max_length": 150,
+            }
+        ),
+        required=True,
+    )
+
+    class Meta:
+        model = Faculty
+        fields = [
+            "name",
+            "section",
+            "course",
+        ]
+
+    def save(self, commit=True):
+        faculty = super().save(commit=False)
+        if commit:
+            faculty.save()
+            self.save_m2m()  # Save the many-to-many relationships (e.g., section and course)
+        return faculty
+
+
+class CourseForm(forms.ModelForm):
+    name = forms.CharField(
+        label="Name",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter course name",
+                "autocomplete": "name",
+                "max_length": 150,
+            }
+        ),
+        required=True,
+    )
+    course_id = forms.CharField(
+        label="Course ID",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter course id",
+                "autocomplete": "course id",
+                "max_length": 150,
+            }
+        ),
+        required=True,
+    )
+
+    class Meta:
+        model = Course
+        fields = [
+            "name",
+            "course_id",
+        ]
+
+    def save(self, commit=True):
+        course = super().save(commit=False)
+        if commit:
+            course.save()
+        return course
+
+    def clean(self):
+        cleaned_data = super().clean()
+        course_id = cleaned_data.get("course_id")
+        if not course_id[:2].isalpha() or not course_id[2:].isdigit() or len(course_id) != 6:
+            raise forms.ValidationError(
+                'Invalid Subject ID format. It should be in the format: CS1002')
 
         return cleaned_data

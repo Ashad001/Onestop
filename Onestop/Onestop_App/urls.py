@@ -4,7 +4,11 @@ from .customDecorator import admin_required, anonymous_required
 
 app_name = "Onestop_App"
 urlpatterns = [
-    path('', views.dashboard, name='dashboard'),
+    path(
+        "", 
+        views.dashboard, 
+        name='dashboard'
+    ),
     path(
         "admin_login/",
         anonymous_required(views.admin_login),
@@ -19,5 +23,15 @@ urlpatterns = [
         "add_student/",
         admin_required(views.add_student),
         name="add_student",
+    ),
+    path(
+        "add_faculty/",
+        admin_required(views.add_faculty),
+        name="add_faculty",
+    ),
+    path(
+        "add_course/",
+        admin_required(views.add_course),
+        name="add_course",
     ),
 ]

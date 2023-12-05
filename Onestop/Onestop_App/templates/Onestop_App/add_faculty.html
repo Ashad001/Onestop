@@ -288,58 +288,25 @@
       <!-- Existing HTML code above this line -->
 
       <div class="content">
-        <h2>Add Students</h2>
-        <form action="{% url 'Onestop_App:add_student' %}" method="post" class="student-form">
+        <h2>Add Faculty</h2>
+        <form action="{% url 'Onestop_App:add_faculty' %}" method="post" class="Faculty-form">
           {% csrf_token %}
           <div class="form-group">
-            <label for="firstName">First Name:</label>
-            {{ student_Form.first_name }}
+            <label for="Name">Name:</label>
+            {{ faculty_Form.name }}
             {% comment %} <input type="text" id="firstName" name="firstName" required /> {% endcomment %}
-          </div>
-
-          <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            {% comment %} <input type="text" id="lastName" name="lastName" required /> {% endcomment %}
-            {{ student_Form.last_name }}
-          </div>
-
-          <div class="form-group">
-            <label for="studentId">Password:</label>
-            {% comment %} <input type="text" id="studentId" name="studentId" required /> {% endcomment %}
-            {{ student_Form.password }}
-          </div>
-          <div class="form-group">
-            <label for="studentId">Username:</label>
-            {% comment %} <input type="text" id="studentId" name="studentId" required /> {% endcomment %}
-            {{ student_Form.username }}
-          </div>
-          <div class="form-group">
-            <label for="studentId">NUID:</label>
-            {% comment %} <input type="text" id="studentId" name="studentId" required /> {% endcomment %}
-            {{ student_Form.nuid }}
-          </div>
-
-          <div class="form-group">
-            <label for="batch">Batch:</label>
-            {% comment %} <input type="text" id="batch" name="batch" required /> {% endcomment %}
-            {{ student_Form.batch }}
           </div>
 
           <div class="form-group">
             <label for="section">Section:</label>
             {% comment %} <input type="text" id="section" name="section" required /> {% endcomment %}
-            {{ student_Form.section }}
+            {{ faculty_Form.section }}
           </div>
 
           <div class="form-group">
-            <label for="email">Email:</label>
-            {% comment %} <input type="email" id="email" name="email" required /> {% endcomment %}
-            {{ student_Form.email }}
-          </div>
-          <div class="form-group">
-            <label for="email">Major:</label>
-            {% comment %} <input type="email" id="email" name="email" required /> {% endcomment %}
-            {{ student_Form.major }}
+            <label for="course">Course:</label>
+            {% comment %} <input type="text" id="section" name="section" required /> {% endcomment %}
+            {{ faculty_Form.course }}
           </div>
 
           <div class="form-group">
