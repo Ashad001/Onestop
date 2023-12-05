@@ -6,7 +6,6 @@ from django.contrib import messages
 from django import forms
 # Create your views here.
 
-
 def page_not_found_404(request, exception, message=None):
     return render(
         request,
