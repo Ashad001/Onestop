@@ -1,0 +1,140 @@
+{
+    "intents": [
+        {
+            "tag": "Greetings",
+            "patterns": [
+                "Hello",
+                "Hi",
+                "How are you?",
+                "Hey there",
+                "Good morning",
+                "Good afternoon",
+                "Good evening",
+                "Yo"
+            ],
+            "responses": [
+                "How may I assist you?",
+                "Hello there! How can I help?",
+                "Good day! What brings you here?",
+                "Hey! It's great to see you!",
+                "Hi! How's it going?",
+                "Good morning! What can I do for you today?",
+                "Good afternoon! How can I assist you?",
+                "Good evening! How can I help you today?",
+                "Yo! What can I do for you?"
+            ]
+        },
+        {
+            "tag": "chatbot_status",
+            "patterns": [
+                "How are you doing?",
+                "Are you feeling well?",
+                "How's everything going?"
+            ],
+            "responses": [
+                "I'm doing well, thank you for asking!",
+                "I'm functioning properly, thanks for checking!",
+                "I'm a chatbot, I don't have emotions, but I'm always ready to assist you!"
+            ]
+        },
+        {
+            "tag": "Jokes",
+            "patterns": [
+                "Tell me a joke",
+                "Do you know any funny jokes?",
+                "I could use a laugh",
+                "Share a joke",
+                "Make a funny joke"
+            ],
+            "responses": [
+                "Why did the tomato turn red? Because it saw the salad dressing!",
+                "Why did the coffee file a police report? It got mugged!",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "Why did the truck driver get lost in Karachi? His GPS was as confused as he was!",
+                "Why did the banker quit his job? He lost interest!",
+                "Why did the smartphone wear glasses? It lost all its contacts!",
+                "What did the janitor say when he jumped out of the closet? 'Supplies!'",
+                "Why do seagulls fly over the sea? Because if they flew over the bay, they'd be bagels!",
+                "Why was the math book sad? Because it had too many problems.",
+                "Why did the Fastian carry a ladder to the university? Because he wanted to climb the higher ranks of success!"
+            ]
+        },
+        {
+            "tag": "Farewell",
+            "patterns": [
+                "Goodbye",
+                "See you later",
+                "Take care"
+            ],
+            "responses": [
+                "Goodbye!",
+                "See you later, alligator!",
+                "Take care!",
+                "Have a nice day!"
+            ]
+        },
+        {
+            "tag": "Internet_Issue",
+            "patterns": [
+                "I'm having trouble with my internet",
+                "My internet connection is not working",
+                "Can you help with internet issues?",
+                "Internet problem",
+                "I can't connect to the Wi-Fi",
+                "Having issues with internet connectivity",
+                "Trouble accessing the internet",
+                "Wi-Fi isn't working",
+                "WiFi isn't working",
+                "Wifi isn't working"
+            ],
+            "responses": [
+                "If you are using GWN-Cloud or the university Wi-Fi, make sure you are using your NU ID and your designated password as the Wi-Fi credentials. If you are facing issues with your credentials or it still doesn't work, please make a ticket to the IT department.",
+                "Check if you are connected to the correct Wi-Fi network. For university Wi-Fi, use your NU ID and assigned password. If the issue persists, submit a ticket to the IT department with details of the problem.",
+                "Ensure you are in a location with good Wi-Fi coverage. If the issue continues, verify your credentials for the university Wi-Fi. If problems persist, create a ticket for the IT department for further assistance.",
+                "For connection issues, confirm that you are using the correct credentials for the university Wi-Fi. If the problem persists, report the issue to the IT department by submitting a ticket.",
+                "Make sure you are using the right Wi-Fi network (GWN-Cloud or university Wi-Fi) and entering the correct login details. If the problem persists, submit a detailed ticket to the IT department for assistance.",
+                "If you are having difficulty connecting to the internet, double-check your Wi-Fi credentials for university Wi-Fi or GWN-Cloud. If the issue persists, create a ticket for the IT department with a description of the problem.",
+                "Ensure your device is set up to connect to the university Wi-Fi. If issues persist, confirm your credentials or make a ticket to the IT department for further assistance.",
+                "Verify that your device is configured for the university Wi-Fi. If you're still unable to connect, report the issue to the IT department by submitting a ticket with as much detail as possible.",
+                "Troubleshoot by checking your Wi-Fi credentials for the university network. If the problem persists, create a ticket for the IT department, providing information about the issue you are facing.",
+                "If you're experiencing issues with internet connectivity, review your Wi-Fi settings and credentials. If the problem persists, submit a ticket to the IT department outlining the specific nature of the issue."
+            ]
+        },
+        {
+            "tag": "Attendance_Inquiry",
+            "patterns": [
+                "How many leaves am I allowed for a 3 credit hour course?",
+                "What is the attendance policy for a 1 credit hour course?",
+                "How does attendance affect my finals eligibility?",
+                "Tell me about the attendance rules",
+                "What happens if I miss classes?",
+                "Can I get information about attendance requirements?"
+            ],
+            "responses": [
+                "For a 3 credit hour course, you are allowed to have 9 leaves, and for a 1 credit hour course, the allowance is 3 leaves. This accounts for 20% of your overall attendance. The minimum required to sit in finals is 80% attendance.",
+                "The attendance policy allows 9 leaves for 3 credit hour courses and 3 leaves for 1 credit hour courses, totaling 20% allowance. You need a minimum of 80% attendance to be eligible for finals.",
+                "Attendance rules vary, but for a 3 credit hour course, you can have 9 leaves, and for a 1 credit hour course, 3 leaves are allowed. This represents 20% of your overall attendance, with 80% needed for finals eligibility.",
+                "Missing classes affects your overall attendance. You are allowed 9 leaves for 3 credit hour courses and 3 leaves for 1 credit hour courses, constituting 20% of your attendance. You must maintain a minimum of 80% attendance for finals eligibility.",
+                "The attendance policy permits 9 leaves for 3 credit hour courses and 3 leaves for 1 credit hour courses, making up 20% of your attendance. You need at least 80% attendance to qualify for finals.",
+                "Sure, here's a summary of the attendance policy: 9 leaves are allowed for 3 credit hour courses, and 3 leaves for 1 credit hour courses. This represents 20% of your attendance, with 80% required for finals eligibility."
+            ]
+        },
+        {
+            "tag": "Exceeded_Leaves",
+            "patterns": [
+                "I have exceeded my allowed leaves. What should I do?",
+                "Can I sit in finals if I've used all my allowed leaves?",
+                "I've used up all my leaves, can I still appear in finals?",
+                "Exceeded attendance leaves, finals eligibility",
+                "What happens if I need to exceed my allowed leaves for genuine reasons?"
+            ],
+            "responses": [
+                "If you've exceeded your allowed leaves, you should contact the Head of Department (HOD) or speak to your course faculty. They may provide guidance or consider leniency based on your circumstances.",
+                "Exceeding your allowed leaves impacts finals eligibility. In such cases, it's recommended to communicate with the Head of Department (HOD) or request your course faculty for possible leniency.",
+                "If you've used all your allowed leaves and still wish to appear in finals, you need to discuss your situation with the Head of Department (HOD) or approach your course faculty for potential solutions.",
+                "Exceeding attendance leaves can affect your finals eligibility. To address this, it's advisable to talk to the Head of Department (HOD) or seek guidance from your course faculty on how to proceed.",
+                "In case you need to exceed your allowed leaves for genuine reasons, it's important to reach out to the Head of Department (HOD) or discuss the matter with your course faculty to explore possible solutions."
+            ]
+        }
+    ]
+}
