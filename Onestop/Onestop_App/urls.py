@@ -34,4 +34,9 @@ urlpatterns = [
         admin_required(views.add_course),
         name="add_course",
     ),
+    path(
+        "add_section/",
+        admin_required(views.add_section),
+        name="add_section",
+    )
 ]

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm
+from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm
 from django.contrib import messages
 from django import forms
 # Create your views here.
@@ -162,3 +162,36 @@ def add_course(request):
             "Onestop_App/add_course.html",
             {"course_Form": CourseForm(), },
         )
+        
+def add_section(request):
+    if request.method=="POST":
+        section_Form = SectionForm(request.POST) 
+        if section_Form.is_valid():
+            try:
+                section_Form.save()
+                messages.success(
+                    request, "Section successfully created"
+                )
+            except forms.ValidationError as e:
+                messages.error(request, "Integrity Error: " + str(e))
+            
+            return render(
+                request,
+                "Onestop_App/add_section.html",
+                {"section_Form": SectionForm(), },
+            )
+        else:
+            messages.error(request, "Something is not quite right (。_。)")
+            
+            return render(
+                request,
+                "Onestop_App/add_section.html",
+                {"section_Form": SectionForm(), },
+            )
+    else:
+        return render(
+            request,
+            "Onestop_App/add_section.html",
+            {"section_Form": SectionForm(), },
+        )
+            

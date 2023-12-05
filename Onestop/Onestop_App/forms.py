@@ -251,7 +251,34 @@ class CourseForm(forms.ModelForm):
         cleaned_data = super().clean()
         course_id = cleaned_data.get("course_id")
         if not course_id[:2].isalpha() or not course_id[2:].isdigit() or len(course_id) != 6:
-            raise forms.ValidationError(
-                'Invalid Subject ID format. It should be in the format: CS1002')
+            self.add_error(
+                "course_id",
+                "Course id must be in format XX####",
+            )
+
+        return cleaned_data
+    
+class SectionForm(forms.ModelForm):
+    class Meta:
+        model = Section
+        fields = [
+            "name",
+            "department",
+        ]
+
+    def save(self, commit=True):
+        section = super().save(commit=False)
+        if commit:
+            section.save()
+        return section
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get("name")
+        if not name[:3].isdigit() or not name[3:].isalpha() or len(name) != 4:
+            self.add_error(
+                "name",
+                "name must be in format ###X",
+            )
 
         return cleaned_data
