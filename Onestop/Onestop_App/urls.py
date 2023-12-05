@@ -1,9 +1,45 @@
 from django.urls import path
 from . import views
-from .customDecorator import admin_required, anonymous_required
+from .customDecorator import admin_required, anonymous_required,normal_user_required
+from django.contrib.auth.decorators import login_required
 
 app_name = "Onestop_App"
 urlpatterns = [
+    path(
+        "",
+        views.student_login,
+        name = "student_login"
+    ),
+    path(
+        "create_query/",
+        login_required(views.create_query),
+        name = "create_query"
+    ),
+    path(
+        "query_status/",
+        login_required(views.query_status),
+        name = "query_status"
+    ),
+    path(
+        "student_timetabe/",
+        login_required(views.student_timetable),
+        name = "student_timetable"
+    ),
+    path(
+        "student_faq/",
+        login_required(views.student_faq),
+        name = "student_faq"
+    ),
+    path(
+        "student_dashboard/",
+        login_required(views.student_dashboard),
+        name = "student_dashboard"
+    ),
+    path(
+        "student_logout/",
+        login_required(views.student_logout),
+        name="student_logout",
+    ),
     path(
         "admin_dashboard/", 
         admin_required(views.dashboard), 

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        header {
+            text-align: left;
+            color: #007bff;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        img {
+            max-width: 150px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: 35px;
+        }
+
+        h1,
+        p {
+            font-size: 32px;
+            margin-bottom: 5px;
+            margin-left: 20px;
+        }
+
+        .sub-heading {
+            font-size: 18px;
+            color: #555;
+            margin-left: 10px;
+        }
+
+        .animated-word {
+            font-size: 14px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+            background-image: linear-gradient(to right, #007bff, #0056b3);
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        body.dark-mode h2 {
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+            transition: box-shadow 0.3s;
+        }
+
+        input::placeholder {
+            color: #ccc;
+        }
+
+        input:focus::placeholder {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .register-link {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-5px);
+            }
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .error-message {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const darkMode = body.classList.contains("dark-mode");
+
+            // Toggle dark mode class
+            body.classList.toggle("dark-mode", !darkMode);
+
+            // Store the user's dark mode preference in localStorage
+            localStorage.setItem("darkMode", !darkMode ? "enabled" : "disabled");
+
+            setLogoImage(!darkMode);
+        }
+
+        function setLogoImage(isDarkMode) {
+            const logoImg = document.getElementById("logo-image");
+            logoImg.src = isDarkMode ?
+                "https://drive.google.com/uc?id=1DBXfLGIhCX7mTP782TS0u6OgAgx5jLYY" :
+                "https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes";
+        }
+
+        // Function to show an error message next to an input field
+        function showError(inputId, message) {
+            const inputElement = document.getElementById(inputId);
+            const errorMessageElement = document.createElement('div');
+            errorMessageElement.className = 'error-message';
+            errorMessageElement.textContent = message;
+
+            // Remove existing error message if any
+            const existingErrorMessage = inputElement.nextSibling;
+            if (existingErrorMessage && existingErrorMessage.className === 'error-message') {
+                inputElement.parentNode.removeChild(existingErrorMessage);
+            }
+
+            // Append the new error message
+            inputElement.parentNode.insertBefore(errorMessageElement, inputElement.nextSibling);
+        }
+
+        // Function to remove error messages
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(errorMessage => errorMessage.parentNode.removeChild(errorMessage));
+        }
+
+        // Function to validate the form before submission
+        function validateForm() {
+            clearErrors(); // Clear existing error messages
+
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+
+            // Check if username and password meet your validation criteria
+            if (usernameInput.value.trim() === '') {
+                showError('username', 'Username is required');
+                return false;
+            }
+
+            if (passwordInput.value.length < 6) {
+                showError('password', 'Password must be at least 8 characters');
+                return false;
+            }
+
+            return true;
+        }
+
+        window.onload = function () {
+            // Check if dark mode preference is stored in localStorage
+            const darkMode = localStorage.getItem("darkMode") === "enabled";
+
+            // Toggle dark mode based on preference
+            document.body.classList.toggle("dark-mode", darkMode);
+
+            setLogoImage(darkMode);
+
+            // Add form submission event listener
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Validate the form before submission
+                if (validateForm()) {
+                    form.submit();
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <header>
+        <img id="logo-image" src="https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes" alt="OneStop Logo">
+        <h1>Welcome To</h1>
+        <h2 class="sub-heading">Students OneStop <span class="animated-word">Digitalized</span></h2>
+    </header>
+    <form action="{% url 'Onestop_App:student_login' %}" method="POST">
+        {% csrf_token %}
+        <h3>Student Login</h3>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Your NU ID">
+    
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="******">
+        {% if login_form.errors %}
+        <div class="alert alert-warning" style="font-size: 0.8rem;" role="alert">{{ login_form.errors }}</div>
+      {% endif %}
+        <button type="submit">Log In</button>
+    </form>
+    
+
+    <div style="position: fixed; top: 20px; right: 20px; cursor: pointer; font-size: 18px;"
+        onclick="toggleDarkMode()">🌙</div>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm
+from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm
 from django.contrib import messages
 from django import forms
 # Create your views here.
@@ -13,6 +13,25 @@ def page_not_found_404(request, exception, message=None):
         {"message": message},
         status=404,
     )
+    
+def student_dashboard(request):
+    return render(
+        request,
+        "Onestop_App/student_dashboard.html",
+    )
+
+
+def create_query(request):
+    return HttpResponse("Create Query")
+
+def query_status(request):
+    return HttpResponse("Query Response")
+
+def student_timetable(request):
+    return HttpResponse("Timetable")
+
+def student_faq(request):
+    return HttpResponse("Student FAQ")
 
 
 def dashboard(request):
@@ -21,7 +40,45 @@ def dashboard(request):
         "Onestop_App/admin_dashboard.html"
     )
 
-
+def student_login(request):
+    if request.method == "POST":
+        login_form = StudentLoginForm(request,data=request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data["username"]
+            password = login_form.cleaned_data["password"]
+            # Attempt to sign user in
+            user = authenticate(request, username=username, password=password)
+            if user is not None and not user.is_superuser:
+                login(request, user)
+                print("hjhkj")
+                return redirect("Onestop_App:student_dashboard")
+            else:
+                messages.error(request, "Invalid username and/or password.")
+                return render(
+                    request,
+                    "Onestop_App/student_login.html",
+                    {
+                        "login_form": login_form,
+                    },
+                )
+        else:
+            messages.error(
+                request, "Invalid email and/or password or submission.")
+            return render(
+                request,
+                "Onestop_App/student_login.html",
+                {"login_form": login_form},
+            )
+    else:
+        if request.user.is_authenticated:
+            return redirect("Onestop_App:student_dashboard")
+        else:
+            return render(
+                request,
+                "Onestop_App/student_login.html",
+                {"login_form":StudentLoginForm()},
+            )
+                    
 def admin_login(request):
     if request.method == "POST":
         login_form = AdministrationLoginForm(request, data=request.POST)
@@ -59,6 +116,10 @@ def admin_login(request):
                 "Onestop_App/admin_login.html",
                 {"login_form": AdministrationLoginForm()},
             )
+
+def student_logout(request):
+    logout(request)
+    return redirect("Onestop_App:student_login")
 
 
 def admin_logout(request):
