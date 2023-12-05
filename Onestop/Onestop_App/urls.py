@@ -5,8 +5,8 @@ from .customDecorator import admin_required, anonymous_required
 app_name = "Onestop_App"
 urlpatterns = [
     path(
-        "", 
-        views.dashboard, 
+        "admin_dashboard/", 
+        admin_required(views.dashboard), 
         name='dashboard'
     ),
     path(

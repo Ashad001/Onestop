@@ -11,6 +11,9 @@ class AdministrationLoginForm(AuthenticationForm):
     pass
 
 
+class StudentLoginForm(AuthenticationForm):
+    pass
+
 class StudentForm(forms.ModelForm):
     """
     All of the required fields are mentioned here.
