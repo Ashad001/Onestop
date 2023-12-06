@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm
 from django.contrib import messages
 from django import forms
+from .chatbot import process_begin
+
 # Create your views here.
 
 def page_not_found_404(request, exception, message=None):
@@ -256,3 +258,11 @@ def add_section(request):
             {"section_Form": SectionForm(), },
         )
             
+def chatbot_view(request):
+    if request.method == "POST":
+        user_input = request.POST.get('user_input', '')
+        result = process_begin(user_input)
+        response_data = {'result': result}
+        return JsonResponse(response_data)
+
+    return render(request, "Onestop_App/chatbot.html")
