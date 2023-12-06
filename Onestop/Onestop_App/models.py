@@ -108,7 +108,7 @@ class Ticket(models.Model):
         ('pending', 'Pending'),
     ]
     SERVICE_CHOICES = [
-        ('change_withdrawal', 'Course Withdrawal'),
+        ('course_withdrawal', 'Course Withdrawal'),
         ('change_section', 'Change Section'),
         ('change_course', 'Change Course'),
         ('tuition_fees', 'Tuition Fees'),
@@ -124,9 +124,10 @@ class Ticket(models.Model):
     class Meta:
         verbose_name = "Ticket"
         verbose_name_plural = "Tickets"
+        ordering = ['-id']
 
     def __str__(self):
-        return self.service | self.status
+        return  f"{self.student.nuid} | {self.status} | {self.service}"
 
 class Notification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)

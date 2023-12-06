@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from Onestop_App.models import User, Student, Faculty, Section, Course
+from Onestop_App.models import User, Student, Faculty, Section, Course, Ticket, Notification
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
@@ -285,3 +285,22 @@ class SectionForm(forms.ModelForm):
             )
 
         return cleaned_data
+class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        exclude = ['status']
+        fields = ['issues_explanation', 'service']
+
+    def save(self, commit=True):
+        ticket = super().save(commit=False)
+        if commit:
+            ticket.save()
+            
+            notification_content = f"New ticket submitted: {ticket.service}"
+            Notification.objects.create(
+                notification_content=notification_content,
+                status='New',
+                is_read=False,
+            )
+            
+        return ticket

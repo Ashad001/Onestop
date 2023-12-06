@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm
+from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm, TicketForm
 from django.contrib import messages
 from django import forms
+from .models import Ticket
 from .chatbot import process_begin
 
 # Create your views here.
@@ -22,19 +23,52 @@ def student_dashboard(request):
         "Onestop_App/student_dashboard.html",
     )
 
-
 def create_query(request):
-    return HttpResponse("Create Query")
+    if request.method == "POST":
+        student = request.user.student  # Assuming the user is authenticated
+        ticket_Form = TicketForm(request.POST, instance=Ticket(student=student))
+        if ticket_Form.is_valid():
+            try:
+                ticket_Form.save()
+                messages.success(request, "Query successfully created")
+            except forms.ValidationError as e:
+                messages.error(request, "Integrity Error: " + str(e))
+            
+            return render(
+                request,
+                "Onestop_App/create_query.html",
+                {"ticket_Form": TicketForm(instance=Ticket(student=student))},
+            )
+        else:
+            print(ticket_Form.errors)
+            messages.error(request, "Something is not quite right (。_。)")
+            return render(
+                request,
+                "Onestop_App/create_query.html",
+                {"ticket_Form": ticket_Form},
+            )
+    else:
+        return render(
+            request,
+            "Onestop_App/create_query.html",
+            {"ticket_Form": TicketForm()},
+        )
 
 def query_status(request):
-    return HttpResponse("Query Response")
+    student = request.user.student
+    tickets = Ticket.objects.filter(student=student)
+    
+    return render(
+        request,
+        "Onestop_App/query_status.html",
+        {"tickets": tickets},
+    )
 
 def student_timetable(request):
-    return HttpResponse("Timetable")
-
-def student_faq(request):
-    return HttpResponse("Student FAQ")
-
+    return render(
+        request,
+        "Onestop_App/student_timetable.html",
+    )
 
 def dashboard(request):
     return render(
@@ -123,11 +157,9 @@ def student_logout(request):
     logout(request)
     return redirect("Onestop_App:student_login")
 
-
 def admin_logout(request):
     logout(request)
     return redirect("Onestop_App:admin_login")
-
 
 def add_student(request):
     if request.method == "POST":
@@ -160,7 +192,6 @@ def add_student(request):
             "Onestop_App/add_student.html",
             {"student_Form": StudentForm(), },
         )
-
 
 def add_faculty(request):
     if request.method == "POST":
