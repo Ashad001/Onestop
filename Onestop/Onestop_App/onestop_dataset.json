@@ -108,7 +108,13 @@
                 "How does attendance affect my finals eligibility?",
                 "Tell me about the attendance rules",
                 "What happens if I miss classes?",
-                "Can I get information about attendance requirements?"
+                "Can I get information about attendance requirements?",
+                "Is there a different attendance policy for online courses?",
+                "What is the minimum attendance percentage required to pass a course?",
+                "How is attendance calculated for practical or lab sessions?",
+                "Tell me about the consequences of consistently low attendance.",
+                "What steps can I take to improve my attendance?",
+                "Can you provide details on the attendance grading system?"
             ],
             "responses": [
                 "For a 3 credit hour course, you are allowed to have 9 leaves, and for a 1 credit hour course, the allowance is 3 leaves. This accounts for 20% of your overall attendance. The minimum required to sit in finals is 80% attendance.",
@@ -126,7 +132,16 @@
                 "Can I sit in finals if I've used all my allowed leaves?",
                 "I've used up all my leaves, can I still appear in finals?",
                 "Exceeded attendance leaves, finals eligibility",
-                "What happens if I need to exceed my allowed leaves for genuine reasons?"
+                "What happens if I need to exceed my allowed leaves for genuine reasons?",
+                "I've run out of permitted leaves. What steps should I take?",
+                "Is there a way to make up for exceeded attendance leaves?",
+                "What if I need more leaves than allowed due to unforeseen circumstances?",
+                "Can I still graduate if I exceed my leaves limit?",
+                "I exceeded my leaves limit accidentally. What should I do now?",
+                "What are the consequences of exceeding attendance limits?",
+                "How can I request an extension for my leaves limit?",
+                "I've used up all my leaves for the semester. Can I get an exception?",
+                "Are there any alternatives if I've used all my allowed leaves?"
             ],
             "responses": [
                 "If you've exceeded your allowed leaves, you should contact the Head of Department (HOD) or speak to your course faculty. They may provide guidance or consider leniency based on your circumstances.",
@@ -134,6 +149,390 @@
                 "If you've used all your allowed leaves and still wish to appear in finals, you need to discuss your situation with the Head of Department (HOD) or approach your course faculty for potential solutions.",
                 "Exceeding attendance leaves can affect your finals eligibility. To address this, it's advisable to talk to the Head of Department (HOD) or seek guidance from your course faculty on how to proceed.",
                 "In case you need to exceed your allowed leaves for genuine reasons, it's important to reach out to the Head of Department (HOD) or discuss the matter with your course faculty to explore possible solutions."
+            ]
+        },
+        {
+            "tag": "Scholarship_Inquiry",
+            "patterns": [
+                "Tell me about available scholarships",
+                "What scholarships does the university offer?",
+                "Can you provide information on scholarships?",
+                "How can I apply for a scholarship?",
+                "Tell me about financial aid options"
+            ],
+            "responses": [
+                "The university offers various scholarships to support students. These include merit-based, need-based, and special category scholarships. You can find detailed information on available scholarships and application procedures on the university website or contact the scholarship office for assistance.",
+                "There are several scholarships available at the university, including merit-based and need-based options. To learn more about these opportunities and their application processes, visit the university's scholarship page on the official website or reach out to the scholarship office.",
+                "Certainly! The university provides different scholarships to eligible students. Information on available scholarships, eligibility criteria, and application procedures can be found on the official university website or by contacting the scholarship office directly.",
+                "To apply for a scholarship, you can visit the university's official scholarship page on the website. Here, you'll find details about the various scholarships offered, their eligibility criteria, and the application process. Feel free to reach out to the scholarship office for further assistance.",
+                "If you're looking for financial aid options, the university offers various scholarships to eligible students. Visit the official scholarship page on the university website for comprehensive information on available scholarships, eligibility criteria, and application processes."
+            ]
+        },
+        {
+            "tag": "Merit_Scholarship_Inquiry",
+            "patterns": [
+                "Tell me about merit-based scholarships",
+                "How can I qualify for a merit scholarship?",
+                "What are the criteria for merit scholarships?",
+                "Explain the process for obtaining a merit-based scholarship"
+            ],
+            "responses": [
+                "Merit-based scholarships are awarded to students based on their academic achievements and performance. To qualify, you generally need to maintain a high GPA or demonstrate exceptional academic excellence. Detailed criteria and application procedures can be found on the university's scholarship page or by contacting the scholarship office.",
+                "Qualifying for a merit-based scholarship often requires maintaining a high GPA and demonstrating exceptional academic performance. The specific criteria and application process for merit scholarships can be found on the university's official scholarship page or by reaching out to the scholarship office.",
+                "Merit-based scholarships are awarded to students with outstanding academic achievements. To qualify, you typically need to maintain a high GPA or demonstrate exceptional academic performance. Detailed information about the criteria and application process can be obtained from the university's scholarship office or website.",
+                "To qualify for a merit-based scholarship, you generally need to excel academically, maintaining a high GPA. Specific criteria and the application process for merit scholarships can be found on the university's scholarship page or by contacting the scholarship office for guidance."
+            ]
+        },
+        {
+            "tag": "Transport_Inquiry",
+            "patterns": [
+                "Tell me about university transportation services",
+                "How does the university handle transportation?",
+                "What are the transportation options for students?",
+                "Can you provide information on transport services?",
+                "How do I access transportation facilities?"
+            ],
+            "responses": [
+                "The university provides transportation services for students. You can find details about routes, schedules, and how to access transportation facilities on the university website or by contacting the transportation office for assistance.",
+                "University transportation services are available for students. Information on transportation options, including routes and schedules, can be found on the official university website or by reaching out to the transportation office for guidance.",
+                "Certainly! The university offers transportation services for students. Details about available transportation options, including routes and schedules, can be obtained from the official university website or by contacting the transportation office directly.",
+                "To access transportation facilities provided by the university, you can visit the official university website for information on routes, schedules, and how to utilize these services. Additionally, feel free to reach out to the transportation office for any specific queries you may have.",
+                "If you're looking for information on university transportation services, visit the official website for details on available options, including routes and schedules. For further assistance, you can also contact the transportation office."
+            ]
+        },
+        {
+            "tag": "Transport_Routes",
+            "patterns": [
+                "Tell me about the transport routes in Karachi",
+                "What are the university transport routes?",
+                "Can you provide information on transportation routes in Karachi?",
+                "Explain the routes covered by university transportation",
+                "How can I find the specific routes for university transport in Karachi?"
+            ],
+            "responses": [
+                "The university transportation system covers various routes in Karachi. You can find detailed information about specific routes on the official university website or by contacting the transportation office for a comprehensive route map.",
+                "University transportation services encompass multiple routes in Karachi. Details about these routes, including stops and schedules, can be found on the official university website or by reaching out to the transportation office for assistance.",
+                "Certainly! The university provides transportation services with routes covering different areas in Karachi. For information on specific routes, visit the official university website or contact the transportation office for a detailed route map.",
+                "To learn about the transport routes in Karachi covered by the university, you can visit the official website for comprehensive information. Additionally, the transportation office can provide you with a detailed map of the routes and schedules.",
+                "If you're interested in university transport routes in Karachi, details can be found on the official university website or by contacting the transportation office. They can provide you with information on specific routes and schedules."
+            ]
+        },
+        {
+            "tag": "Time_of_Departure",
+            "patterns": [
+                "What is the time of departure for university transportation?",
+                "Can you tell me the schedule for transport departure?",
+                "When do the university buses leave?",
+                "Explain the time of departure for different routes",
+                "What time does the bus leave from the main point?"
+            ],
+            "responses": [
+                "The time of departure for university transportation is between 6:00 AM and 6:45 AM for different routes. Additionally, the buses leave from the main point at 4:10 PM on weekdays. You can find detailed schedules for specific routes on the official university website or by contacting the transportation office.",
+                "University transportation departs between 6:00 AM and 6:45 AM for different routes. The main point departure time is at 4:10 PM on weekdays. For specific schedules and routes, please refer to the official university website or contact the transportation office.",
+                "Certainly! The university transportation schedule includes departure times between 6:00 AM and 6:45 AM for different routes. The main point departure time is at 4:10 PM on weekdays. Detailed route schedules can be found on the official university website or by reaching out to the transportation office.",
+                "The time of departure for university transportation is from 6:00 AM to 6:45 AM for various routes. The main point departs at 4:10 PM on weekdays. Specific schedules and routes can be obtained from the official university website or by contacting the transportation office.",
+                "If you're inquiring about the time of departure for university transportation, it is between 6:00 AM and 6:45 AM for different routes. The main point departure time is at 4:10 PM on weekdays. Visit the official university website or contact the transportation office for more details."
+            ]
+        },
+        {
+            "tag": "Certificate_Inquiry",
+            "patterns": [
+                "How can I obtain certificates from the deans?",
+                "Tell me about the process for getting certificates from the rector",
+                "What certificates are provided by the deans?",
+                "Can you provide information on obtaining certificates?",
+                "How do I request certificates from the university deans?"
+            ],
+            "responses": [
+                "Certificates from the deans can be obtained by following the official process outlined by the university. You can find detailed information on the types of certificates available and the application procedure on the official university website or by contacting the dean's office.",
+                "To obtain certificates from the rector, you should follow the university's official process. Information on the types of certificates offered and the application procedure can be found on the official website or by reaching out to the rector's office.",
+                "The deans provide various certificates to students. Information about the types of certificates and the process for obtaining them can be found on the official university website or by contacting the deans' office directly.",
+                "Certainly! To request certificates from the deans, you can follow the official university process. Details on available certificates and the application procedure are typically outlined on the official website or can be obtained by contacting the deans' office.",
+                "If you're looking to obtain certificates from the university deans, information on the types of certificates and the application process can be found on the official university website. Feel free to contact the deans' office for additional assistance."
+            ]
+        },
+        {
+            "tag": "Certificate_Timeline",
+            "patterns": [
+                "When will I receive my certificates from the deans?",
+                "What is the timeline for getting certificates from the rector?",
+                "Can you tell me when the deans issue certificates?",
+                "How long does it take to receive certificates from the university?",
+                "When can I expect to get my certificates from the deans?"
+            ],
+            "responses": [
+                "Certificates from the deans are typically issued by the end of every semester. The university follows a specific timeline for certificate issuance. You can expect to receive your certificates within that timeframe.",
+                "The timeline for getting certificates from the rector is usually by the end of every semester. Certificates are processed and issued according to the university's schedule. You should receive your certificates within the specified timeframe.",
+                "The deans generally issue certificates by the end of each semester. The university follows a timeline for certificate issuance, and you can expect to receive your certificates within that period.",
+                "The university has a specific timeline for issuing certificates, and typically, certificates from the deans are distributed by the end of every semester. You can expect to receive your certificates within the prescribed timeframe.",
+                "Certificates from the deans are usually issued by the end of each semester. The university follows a timeline for certificate issuance, and you can anticipate receiving your certificates within that schedule."
+            ]
+        },
+        {
+            "tag": "Course_Inquiry",
+            "patterns": [
+                "Tell me about the available courses",
+                "What courses does the university offer?",
+                "Can you provide information on the courses?",
+                "How can I learn about the different programs?",
+                "Tell me about the academic programs at the university"
+            ],
+            "responses": [
+                "The university offers a variety of courses in Computer Science, Information Technology, Data Science, Robotics, Electrical Engineering, and Business Administration (BBA). Detailed information about each program, including courses offered, can be found on the official university website or by contacting the academic advising office.",
+                "The courses offered by the university cover a range of disciplines including Computer Science, Information Technology, Data Science, Robotics, Electrical Engineering, and Business Administration (BBA). You can explore detailed information about each program on the official university website or by reaching out to the academic advising office.",
+                "Certainly! The university provides a diverse range of courses in Computer Science, Information Technology, Data Science, Robotics, Electrical Engineering, and Business Administration (BBA). For details on specific programs and courses, please visit the official university website or contact the academic advising office.",
+                "To learn about the available courses, explore the official university website for comprehensive information on programs in Computer Science, Information Technology, Data Science, Robotics, Electrical Engineering, and Business Administration (BBA). For personalized guidance, you can also contact the academic advising office.",
+                "If you're interested in learning about the courses offered, the university provides programs in Computer Science, Information Technology, Data Science, Robotics, Electrical Engineering, and Business Administration (BBA). Detailed information is available on the official university website, and you can contact the academic advising office for further assistance."
+            ]
+        },
+        {
+            "tag": "Eligibility_Criteria",
+            "patterns": [
+                "What are the eligibility criteria for the Computer Science program?",
+                "Can you tell me about the eligibility for the Data Science course?",
+                "What are the requirements for Electrical Engineering program?",
+                "Explain the eligibility criteria for the BBA program",
+                "How can I qualify for the Robotics course?"
+            ],
+            "responses": [
+                "The eligibility criteria for each program vary. For the Computer Science program, you may need a strong background in mathematics and programming. Detailed criteria for Data Science, Electrical Engineering, BBA, and Robotics can be found on the official university website or by contacting the academic advising office.",
+                "Eligibility criteria for the Data Science course, as well as other programs like Computer Science, Electrical Engineering, BBA, and Robotics, are available on the official university website. Specific requirements for each program can also be obtained by reaching out to the academic advising office.",
+                "Certainly! Eligibility criteria for programs such as Computer Science, Data Science, Electrical Engineering, BBA, and Robotics are outlined on the official university website. For detailed information and specific requirements, please contact the academic advising office.",
+                "To understand the eligibility criteria for the programs offered, including Computer Science, Data Science, Electrical Engineering, BBA, and Robotics, visit the official university website. Additional details and specific requirements can be obtained by contacting the academic advising office.",
+                "If you want to qualify for programs like Computer Science, Data Science, Electrical Engineering, BBA, or Robotics, check the eligibility criteria on the official university website. For personalized guidance and specific requirements, reach out to the academic advising office."
+            ]
+        },
+        {
+            "tag": "Cricket_Bat_Inquiry",
+            "patterns": [
+                "I lost my cricket bat during the game",
+                "Can you help me find my misplaced cricket bat?",
+                "What should I do if I lose my cricket bat?",
+                "I can't find my cricket bat",
+                "I lost my cricket bat",
+                "I misplaced my cricket bat",
+                "I can't find my cricket bat",
+                "Where is my cricket bat?",
+                "I think I lost my cricket bat",
+                "My cricket bat is missing",
+                "I don't know where my cricket bat is",
+                "I can't locate my cricket bat",
+                "My cricket bat seems to be lost",
+                "I seem to have misplaced my cricket bat"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost cricket bat. If your cricket bat is missing, please contact the sports department. The fine for a lost cricket bat is 8000 Pakistani Rupees.",
+                "Oh no, your cricket bat is missing! Please report this to the sports department as soon as possible. Be aware that there might be a fine of 8000 Pakistani Rupees for the lost item.",
+                "I understand that you've lost your cricket bat. Please get in touch with the sports department. Please note that a fine of 8000 Pakistani Rupees may apply.",
+                "It's unfortunate that you've lost your cricket bat. Please inform the sports department about this. There could be a fine of 8000 Pakistani Rupees for the lost cricket bat.",
+                "I'm sorry to hear that you can't find your cricket bat. You should report this to the sports department. Be advised that a lost cricket bat may result in a fine of 8000 Pakistani Rupees."
+            ]
+        },
+        {
+            "tag": "Cricket_Ball_Inquiry",
+            "patterns": [
+                "I can't find my cricket ball",
+                "I lost my cricket ball",
+                "I misplaced my cricket ball",
+                "Where is my cricket ball?",
+                "I think I lost my cricket ball",
+                "My cricket ball is missing",
+                "I don't know where my cricket ball is",
+                "I can't locate my cricket ball",
+                "My cricket ball seems to be lost",
+                "I seem to have misplaced my cricket ball"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost cricket ball. If your cricket ball is missing, please contact the sports department. The fine for a lost cricket ball is 190 Pakistani Rupees."
+            ]
+        },
+        {
+            "tag": "Football_Inquiry",
+            "patterns": [
+                "I lost my football during the match",
+                "Can you help me find my misplaced football?",
+                "What should I do if I lose my football?"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost football. If your football is missing, please contact the sports department. The fine for a lost football is 7000 Pakistani Rupees."
+            ]
+        },
+        {
+            "tag": "Basketball_Inquiry",
+            "patterns": [
+                "I lost my basketball after the game",
+                "Can you help me find my misplaced basketball?",
+                "What should I do if I lose my basketball?"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost basketball. If your basketball is missing, please contact the sports department. The fine for a lost basketball is 8000 Pakistani Rupees."
+            ]
+        },
+        {
+            "tag": "Tennis_Racket_Inquiry",
+            "patterns": [
+                "I lost my tennis racket during the match",
+                "Can you help me find my misplaced tennis racket?",
+                "What should I do if I lose my tennis racket?"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost tennis racket. If your tennis racket is missing, please contact the sports department. The fine for a lost tennis racket is 7000 Pakistani Rupees."
+            ]
+        },
+        {
+            "tag": "Badminton_Racket_Inquiry",
+            "patterns": [
+                "I lost my badminton racket after the game",
+                "Can you help me find my misplaced badminton racket?",
+                "What should I do if I lose my badminton racket?"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost badminton racket. If your badminton racket is missing, please contact the sports department. The fine for a lost badminton racket is 5000 Pakistani Rupees."
+            ]
+        },
+        {
+            "tag": "ID_Generation_Inquiry",
+            "patterns": [
+                "When will my ID card be generated?",
+                "Can you tell me the timeline for ID card issuance?",
+                "How long does it take to get my student ID card?",
+                "When can I expect to receive my ID card?",
+                "What is the schedule for ID card generation?"
+            ],
+            "responses": [
+                "Student ID cards are typically generated during the mid-semester. You can expect to receive your ID card around that time. If you have specific concerns or questions, please contact the student affairs office for more information."
+            ]
+        },
+        {
+            "tag": "Lost_ID_Card_Inquiry",
+            "patterns": [
+                "I lost my ID card. What should I do?",
+                "Can you help me with a lost student ID card?",
+                "What is the process for a misplaced ID card?",
+                "My student ID card is missing. What are the steps to take?"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost ID card. Please report the loss to the student affairs office as soon as possible. The fine for a lost ID card is 500 Pakistani Rupees. They will guide you on the necessary steps to obtain a replacement."
+            ]
+        },
+        {
+            "tag": "ID_Collection_Inquiry",
+            "patterns": [
+                "Where can I collect my ID card?",
+                "What is the location for ID card collection?",
+                "Can you tell me where to pick up my student ID card?",
+                "Explain the process for collecting my ID card",
+                "When and where can I get my student ID card?"
+            ],
+            "responses": [
+                "You can collect your student ID card from the student affairs office. They will provide you with the necessary information regarding the collection process, including the designated location and timeframe for ID card pickup."
+            ]
+        },
+        {
+            "tag": "Degree_Attestation_Inquiry",
+            "patterns": [
+                "How can I get my degree attested?",
+                "Can you provide information on degree attestation?",
+                "What is the process for attesting my degree?",
+                "Tell me about the degree attestation procedure",
+                "How do I apply for degree attestation?"
+            ],
+            "responses": [
+                "To get your degree attested, you need to follow the official procedure outlined by the university. Detailed information on the degree attestation process can be found on the official university website or by contacting the attestation office. They will guide you through the necessary steps."
+            ]
+        },
+        {
+            "tag": "Attestation_Timeline_Inquiry",
+            "patterns": [
+                "What is the timeline for degree attestation?",
+                "Can you tell me when my degree will be attested?",
+                "How long does the degree attestation process take?",
+                "When can I expect to receive my attested degree?",
+                "Tell me about the expected timeframe for degree attestation"
+            ],
+            "responses": [
+                "The timeline for degree attestation varies. Typically, the process takes [Specify Duration], but it may vary based on factors such as the volume of requests. For specific details, please check the official university website or contact the attestation office for accurate information."
+            ]
+        },
+        {
+            "tag": "Lost_Attested_Document_Inquiry",
+            "patterns": [
+                "I lost my attested degree document. What should I do?",
+                "Can you help me with a lost attested document?",
+                "What is the process for a misplaced attested degree?",
+                "My attested degree is missing. What are the steps to take?"
+            ],
+            "responses": [
+                "I'm sorry to hear about your lost attested document. Please report the loss to the attestation office as soon as possible. They will guide you on the necessary steps to obtain a replacement and provide assistance in this matter."
+            ]
+        },
+        {
+            "tag": "Attestation_Fee_Inquiry",
+            "patterns": [
+                "How much is the fee for degree attestation?",
+                "Can you tell me the cost of attesting my degree?",
+                "What are the charges for degree attestation?",
+                "Explain the fee structure for degree attestation",
+                "How can I pay for the attestation of my degree?"
+            ],
+            "responses": [
+                "The fee for degree attestation is 2000 Pakistani Rupees. You can find detailed information on the official university website or contact the attestation office for specific payment procedures and accepted methods of payment."
+            ]
+        },
+        {
+            "tag": "Fee_Payment_Inquiry",
+            "patterns": [
+                "How can I pay my tuition fee?",
+                "How can i submit my tution fees",
+                "Tell me about the fee payment process",
+                "What are the methods for fee payment?",
+                "Explain how to register and pay my fees",
+                "Can you guide me on how to make my tuition payment?",
+                "Are there any online options for paying my tuition fee?",
+                "Tell me more about the available payment methods for fees.",
+                "Can I make partial payments for my tuition?",
+                "Is there an installment plan for tuition fee payments?",
+                "What are the consequences of late fee payments?"
+            ],
+            "responses": [
+                "You can pay your tuition fee through various methods. The accepted modes of payment include Faisal Bank, QuickPay, and Bank Transfer. Detailed information on the fee payment process can be found on the official university website or by contacting the accounts office for assistance."
+            ]
+        },
+        {
+            "tag": "Fee_Registration_Deadline_Inquiry",
+            "patterns": [
+                "When is the deadline for fee registration?",
+                "Can you tell me the last date for fee payment?",
+                "What is the fee registration cutoff date?",
+                "Explain the timeline for registering my fees",
+                "When do I need to complete my fee registration?"
+            ],
+            "responses": [
+                "The deadline for fee registration is 2 months after the semester is started. It's important to complete your fee registration by this date to avoid any late fees or complications. For specific details and any changes to the deadline, please refer to the official university website or contact the accounts office."
+            ]
+        },
+        {
+            "tag": "Late_Fee_Inquiry",
+            "patterns": [
+                "I missed the fee registration deadline. What should I do?",
+                "Can you guide me on paying late fees?",
+                "What is the process for late fee payment?",
+                "I forgot to register my fees on time. What are the steps now?"
+            ],
+            "responses": [
+                "If you missed the fee registration deadline, you may be subject to late fees. Please contact the accounts office immediately to discuss the late fee payment process and any necessary steps to rectify the situation. They will provide guidance on the next steps."
+            ]
+        },
+        {
+            "tag": "Fee_Refund_Inquiry",
+            "patterns": [
+                "I need to inquire about the fee refund process",
+                "Can you tell me about the procedure for fee refunds?",
+                "What are the conditions for getting a fee refund?",
+                "Explain the timeline and conditions for fee refunds"
+            ],
+            "responses": [
+                "The fee refund process is governed by specific conditions. For detailed information on the procedure, eligibility criteria, and timeline for fee refunds, please refer to the official university website or contact the accounts office. They will provide you with accurate information based on your situation."
             ]
         }
     ]
