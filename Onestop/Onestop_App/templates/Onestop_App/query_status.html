@@ -12,10 +12,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://drive.google.com/uc?id=1Qz3mtOvN9pjRztWZG16We6z1B2MDUJmL">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       body {
-        font-family: 'Arial', sans-serif;
+        font-family: 'Quicksand', sans-serif
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
@@ -60,7 +62,7 @@
       }
       
       .content-container {
-        margin-left: 220px; /* Adjusted for sidebar width */
+        margin-left: 200px; /* Adjusted for sidebar width */
         flex-grow: 1; /* Allow content to grow and fill remaining space */
       }
       
@@ -83,7 +85,7 @@
       }
       
       .header img {
-        max-width: 150px;
+        max-width: 100px;
         display: block;
         margin: 0 auto; /* Center the image */
       }
@@ -91,7 +93,7 @@
       h1,
       h2 {
         color: #007bff;
-        margin: 0;
+        margin-bottom: 10px;
       }
       body.dark-mode h2 {
         color: #fff; /* Text color in dark mode */
@@ -197,6 +199,23 @@
           opacity: 1;
         }
       }
+      td.approved {
+        color: green;
+      }
+      td.submitted {
+        color: purple;
+      }
+      td.rejected {
+          color: red;
+      }
+
+      td.pending {
+          color: blue;
+      }
+      .sidebar a.active {
+        background-color: #007bff; /* Highlight color for active link */
+        color: #fff; /* Text color for active link */
+      }
     </style>
     <script>
       // document.addEventListener('DOMContentLoaded', function () {
@@ -225,7 +244,7 @@
       
       function setLogoImage(isDarkMode) {
         const logoImg = document.getElementById('logo-image')
-        logoImg.src = isDarkMode ? 'https://drive.google.com/uc?id=1DBXfLGIhCX7mTP782TS0u6OgAgx5jLYY' : 'https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes'
+        logoImg.src = isDarkMode ? 'https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz' : 'https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz'
       }
       
       window.onload = function () {
@@ -238,15 +257,26 @@
 
   <body>
     <div class="sidebar">
-      <a href="{% url 'Onestop_App:create_query' %}"><i class="fas fa-pen"></i>Create A Query</a>
-      <a href="{% url 'Onestop_App:query_status' %}"><i class="fas fa-eye"></i>Query Status</a>
-      <a href="{% url 'Onestop_App:student_timetable' %}"><i class="fas fa-table"></i>Time Table</a>
-      <a href="{% url 'Onestop_App:chatbot' %}"><i class="fas fa-book"></i>FAQs</a>
+      <a href="{% url 'Onestop_App:student_dashboard' %}" class="{% if request.path == '/student_dashboard/' %}active{% endif %}">
+        <i class="fas fa-home"></i>Home
+      </a>
+      <a href="{% url 'Onestop_App:create_query' %}" class="{% if request.path == '/create_query/' %}active{% endif %}">
+          <i class="fas fa-pen"></i>Create A Query
+      </a>
+      <a href="{% url 'Onestop_App:query_status' %}" class="{% if request.path == '/query_status/' %}active{% endif %}">
+          <i class="fas fa-eye"></i>Query Status
+      </a>
+      <a href="{% url 'Onestop_App:student_timetable' %}" class="{% if request.path == '/student_timetable/' %}active{% endif %}">
+          <i class="fas fa-table"></i>Time Table
+      </a>
+      <a href="{% url 'Onestop_App:chatbot' %}" class="{% if request.path == '/chatbot/' %}active{% endif %}">
+          <i class="fas fa-book"></i>FAQs
+      </a>
     </div>
 
     <div class="content-container">
       <div class="header">
-        <img id="logo-image" src="https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes" alt="OneStop Logo" />
+        <img id="logo-image" src="https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz" alt="OneStop Logo" />
         <h1 class="sub-heading"><span id="typed-output"></span></h1>
         <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
         <a href="{% url 'Onestop_App:student_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
@@ -267,7 +297,7 @@
                 <tr>
                   <td>{{ ticket.service }}</td>
                   <td>{{ ticket.issues_explanation }}</td>
-                  <td>{{ ticket.status }}</td>
+                  <td class="{{ ticket.status|lower }}">{{ ticket.status }}</td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -277,5 +307,7 @@
         {% endif %}
       </div>
     </div>
+    <div style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; font-size: 18px;" onclick="toggleDarkMode()">🌙</div>
+
   </body>
 </html>
