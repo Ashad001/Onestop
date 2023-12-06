@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class User(AbstractUser):
@@ -129,10 +131,19 @@ class Ticket(models.Model):
     def __str__(self):
         return  f"{self.student.nuid} | {self.status} | {self.service}"
 
+
+@receiver(post_save, sender=Ticket)
+def send_ticket_notification(sender, instance, created, **kwargs):
+    if created:
+        notification_content = f"New ticket submitted: {instance.service} by {instance.student.nuid}"
+        Notification.objects.create(
+            notification_content=notification_content,
+            is_read=False,  # Set is_read to False initially
+        )
+        
 class Notification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     notification_content = models.TextField()
-    status = models.CharField(max_length=10)
     is_read = models.BooleanField(default=False)
 
     class Meta:
@@ -140,7 +151,7 @@ class Notification(models.Model):
         verbose_name_plural = "Notifications"
         
     def __str__(self):
-        return self.status
+        return f"{self.notification_content}"
 
 
 class Report(models.Model):

@@ -295,12 +295,4 @@ class TicketForm(forms.ModelForm):
         ticket = super().save(commit=False)
         if commit:
             ticket.save()
-            
-            notification_content = f"New ticket submitted: {ticket.service}"
-            Notification.objects.create(
-                notification_content=notification_content,
-                status='New',
-                is_read=False,
-            )
-            
         return ticket
