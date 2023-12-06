@@ -108,6 +108,7 @@
                 "How does attendance affect my finals eligibility?",
                 "Tell me about the attendance rules",
                 "What happens if I miss classes?",
+                "What if im below 80%?",
                 "Can I get information about attendance requirements?",
                 "Is there a different attendance policy for online courses?",
                 "What is the minimum attendance percentage required to pass a course?",
@@ -343,7 +344,7 @@
                 "I seem to have misplaced my cricket ball"
             ],
             "responses": [
-                "I'm sorry to hear about your lost cricket ball. If your cricket ball is missing, please contact the sports department. The fine for a lost cricket ball is 190 Pakistani Rupees."
+                "I'm sorry to hear about your lost cricket ball. If your cricket ball is missing, please contact the sports department. The fine for a lost cricket ball is 190 Pakistani Rupees  😂😂(sucks to be you)."
             ]
         },
         {
@@ -354,7 +355,7 @@
                 "What should I do if I lose my football?"
             ],
             "responses": [
-                "I'm sorry to hear about your lost football. If your football is missing, please contact the sports department. The fine for a lost football is 7000 Pakistani Rupees."
+                "I'm sorry to hear about your lost football. If your football is missing, please contact the sports department. The fine for a lost football is 7000 Pakistani Rupees. 💀"
             ]
         },
         {
@@ -365,7 +366,7 @@
                 "What should I do if I lose my basketball?"
             ],
             "responses": [
-                "I'm sorry to hear about your lost basketball. If your basketball is missing, please contact the sports department. The fine for a lost basketball is 8000 Pakistani Rupees."
+                "I'm sorry to hear about your lost basketball. If your basketball is missing, please contact the sports department. The fine for a lost basketball is 8000 Pakistani Rupees 💀💀 (A new spalding costs 12k btw)."
             ]
         },
         {
