@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Students One Stop - Add Course</title>
+    <title>Students One Stop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <!-- CSS -->
@@ -53,10 +53,6 @@
         color: white;
         text-decoration: none;
         padding: 10px 0;
-      }
-      
-      .sidebar a.active {
-        background-color: #007bff;
       }
       
       .sidebar i {
@@ -179,40 +175,6 @@
         background-clip: text;
         -webkit-background-clip: text;
       }
-      .student-form {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-      
-      .form-group {
-        margin-bottom: 15px;
-      }
-      
-      label {
-        display: block;
-        font-weight: bold;
-      }
-      
-      input {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-top: 4px;
-      }
-      
-      input[type='submit'] {
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      
-      input[type='submit']:hover {
-        background-color: #0056b3;
-      }
       
       @keyframes bounce {
         0%,
@@ -237,6 +199,22 @@
       }
     </style>
     <script>
+      // document.addEventListener('DOMContentLoaded', function () {
+      //     var options = {
+      //         strings: ["Aheed, Ashad, Haseeb Present"],
+      //         typeSpeed: 100,
+      //         showCursor: true,
+      //         cursorChar: '',
+      //         onComplete: function () {
+      //             function delayedFunction() {
+      //                 typed.destroy();
+      //             }
+      //             setTimeout(delayedFunction, 2000);
+      //         }
+      //     };
+      //     var typed = new Typed('#typed-output', options);
+      // });
+      
       function toggleDarkMode() {
         const body = document.body
         const darkMode = body.classList.contains('dark-mode')
@@ -254,15 +232,6 @@
         const darkMode = localStorage.getItem('darkMode') === 'enabled'
         document.body.classList.toggle('dark-mode', darkMode)
         setLogoImage(darkMode)
-      
-        // Highlight "Add Students" sidebar button
-        const sidebarLinks = document.querySelectorAll('.sidebar a')
-        sidebarLinks.forEach((link) => {
-          link.classList.remove('active')
-          if (link.href === window.location.href) {
-            link.classList.add('active')
-          }
-        })
       }
     </script>
   </head>
@@ -285,47 +254,19 @@
         <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
         <a href="{% url 'Onestop_App:admin_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
       </div>
-      <!-- Existing HTML code above this line -->
-
       <div class="content">
-        <h2>Add Section</h2>
-        <form action="{% url 'Onestop_App:add_section' %}" method="post" class="Course-form">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="Name">Name:</label>
-            {{ section_Form.name }}
-            {% comment %} <input type="text" id="firstName" name="firstName" required /> {% endcomment %}
-          </div>
-
-          <div class="form-group">
-            <label for="Department">Department:</label>
-            {% comment %} <input type="text" id="section" name="section" required /> {% endcomment %}
-            {{ section_Form.department }}
-          </div>
-
-          <div class="form-group">
-            <input type="submit" value="Submit" />
-          </div>
-        </form>
-
-        <div class="mt-5">
-          {% if messages %}
-            <div class="alert alert-success" style="font-size: 0.8rem" role="alert">
-              {% for message in messages %}
-                {{ message }}
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
-        <div class="mt-5">
-          {% if student_Form.errors %}
-            <div class="alert alert-warning" style="font-size: 0.8rem" role="alert">{{ student_Form.errors }}</div>
-          {% endif %}
-        </div>
+        <h2>Admin Notifications</h2>
+        <ul>
+          {% for notification in notifications %}
+            <li>
+              {{ notification.timestamp }}: {{ notification.notification_content }}
+              {% if not notification.is_read %}
+                (<a href="{% url 'Onestop_App:mark_notification_as_read' notification.id %}">Mark as Read</a>)
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
       </div>
-
-      <!-- Existing HTML code below this line -->
     </div>
-    <div style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; font-size: 18px;" onclick="toggleDarkMode()">🌙</div>
   </body>
 </html>

@@ -14,6 +14,7 @@ class AdministrationLoginForm(AuthenticationForm):
 class StudentLoginForm(AuthenticationForm):
     pass
 
+
 class StudentForm(forms.ModelForm):
     """
     All of the required fields are mentioned here.
@@ -260,7 +261,8 @@ class CourseForm(forms.ModelForm):
             )
 
         return cleaned_data
-    
+
+
 class SectionForm(forms.ModelForm):
     class Meta:
         model = Section
@@ -274,7 +276,7 @@ class SectionForm(forms.ModelForm):
         if commit:
             section.save()
         return section
-    
+
     def clean(self):
         cleaned_data = super().clean()
         name = cleaned_data.get("name")
@@ -285,14 +287,38 @@ class SectionForm(forms.ModelForm):
             )
 
         return cleaned_data
+
+
 class TicketForm(forms.ModelForm):
+    admin_response = forms.CharField(widget=forms.Textarea, required=False)
+
     class Meta:
         model = Ticket
         exclude = ['status']
-        fields = ['issues_explanation', 'service']
+        fields = ['issues_explanation', 'service', 'admin_response']
 
     def save(self, commit=True):
         ticket = super().save(commit=False)
         if commit:
             ticket.save()
         return ticket
+
+
+class ResponseForm(forms.Form):
+    admin_response = forms.CharField(widget=forms.Textarea)
+    status = forms.ChoiceField(
+        choices=[
+            ('----------------', '----------------'),
+            ('submitted', 'Submitted'),
+            ('approved', 'Approved'),
+            ('rejected', 'Rejected'),
+            ('in_progress', 'In Progress'),
+            ('pending', 'Pending')
+        ]
+    )
+    notification = forms.BooleanField(
+        initial=True, 
+        widget=forms.HiddenInput(), 
+        required=True
+    )
+    

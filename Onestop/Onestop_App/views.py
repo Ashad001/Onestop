@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm, TicketForm
+from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm, TicketForm, ResponseForm
 from django.contrib import messages
 from django import forms
-from .models import Ticket
+from .models import Ticket, Notification, User
 from .chatbot import process_begin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -297,3 +298,76 @@ def chatbot_view(request):
         return JsonResponse(response_data)
 
     return render(request, "Onestop_App/chatbot.html")
+
+def admin_queries(request):
+    all_tickets = Ticket.objects.all()
+    tickets_per_page = 10
+    paginator = Paginator(all_tickets, tickets_per_page)
+    page = request.GET.get('page')
+
+    try:
+        tickets = paginator.page(page)
+    except PageNotAnInteger:
+        tickets = paginator.page(1)
+    except EmptyPage:
+        tickets = paginator.page(paginator.num_pages)
+
+    return render(
+        request,
+        "Onestop_App/admin_queries.html",
+        {"tickets": tickets},
+    )
+
+def admin_response(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    if request.method == 'POST':
+        form = ResponseForm(request.POST)
+        if form.is_valid():
+            ticket.admin_response = form.cleaned_data['admin_response']
+            ticket.status = form.cleaned_data['status']
+            ticket.save()
+
+            if form.cleaned_data['notification']:
+                create_notification(ticket.student, f"Your ticket has a new response with request for {ticket.service}.")
+
+            return redirect('Onestop_App:admin_queries')
+    else:
+        form = ResponseForm()
+
+    return render(
+        request,
+        'Onestop_App/admin_response_form.html',
+        {'ticket': ticket, 'form': form}
+    )
+
+def create_notification(student, content):
+    # Access the associated User instance through the student
+    user = student.user
+
+    Notification.objects.create(
+        user=user,
+        notification_content=content,
+        is_read=False,
+    )
+
+def admin_notifications(request):
+    user_haseeb = User.objects.get(username='haseeb')
+
+    # Filter notifications for the specified user
+    notifications = Notification.objects.filter(user=user_haseeb).order_by('-timestamp')
+
+    return render(request, 'Onestop_App/admin_notifications.html', {'notifications': notifications})
+
+def mark_notification_as_read(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id)
+    notification.mark_as_read()
+
+    # Assuming your Ticket model has a ForeignKey to Notification, adjust this part accordingly
+    ticket_id = notification.ticket.id  # Replace 'ticket' with the actual ForeignKey name in your Notification model
+
+    return redirect('Onestop_App:ticket_detail', ticket_id=ticket_id)
+
+def ticket_detail(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    return render(request, 'Onestop_App/ticket_detail.html', {'ticket': ticket})

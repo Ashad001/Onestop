@@ -15,16 +15,18 @@ class Section(models.Model):
         ("CS", "Computer Science"),
         ("EE", "Electrical Engineering"),
     ]
-    name = models.CharField(max_length=4, unique=True,null=False, default='0000')
+    name = models.CharField(max_length=4, unique=True,
+                            null=False, default='0000')
     department = models.CharField(
         max_length=30, choices=Department_Choices, null=False, default='None')
 
     class Meta:
         verbose_name = "Section"
         verbose_name_plural = "Section"
-        
+
     def __str__(self):
         return self.name
+
 
 class Student(models.Model):
     Major_Choices = [
@@ -48,7 +50,7 @@ class Student(models.Model):
     class Meta:
         verbose_name = "Student"
         verbose_name_plural = "Students"
-        
+
     def __str__(self):
         return self.nuid
 
@@ -62,7 +64,7 @@ class Course(models.Model):
     class Meta:
         verbose_name = "Course"
         verbose_name_plural = "Courses"
-        
+
     def __str__(self):
         return self.course_id
 
@@ -76,7 +78,7 @@ class Faculty(models.Model):
     class Meta:
         verbose_name = "Faculty"
         verbose_name_plural = "Faculties"
-    
+
     def __str__(self):
         return self.name
 
@@ -101,6 +103,7 @@ class Appointment(models.Model):
     def __str__(self):
         return self.student.nuid | self.status
 
+
 class Ticket(models.Model):
     STATUS_CHOICES = [
         ('submitted', 'Submitted'),
@@ -122,6 +125,7 @@ class Ticket(models.Model):
         max_length=30, choices=SERVICE_CHOICES, null=False, default='None')
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default='submitted')
+    admin_response = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Ticket"
@@ -129,27 +133,46 @@ class Ticket(models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return  f"{self.student.nuid} | {self.status} | {self.service}"
+        return f"{self.student.nuid} | {self.status} | {self.service}"
 
 
 @receiver(post_save, sender=Ticket)
 def send_ticket_notification(sender, instance, created, **kwargs):
     if created:
+        admin_user = User.objects.get(username='haseeb')  # Replace 'admin' with the actual admin username
+
         notification_content = f"New ticket submitted: {instance.service} by {instance.student.nuid}"
+
+        # Create a Notification instance linked to the admin user
         Notification.objects.create(
             notification_content=notification_content,
-            is_read=False,  # Set is_read to False initially
+            is_read=False,
+            user=admin_user,
+            ticket=instance,  # Link the notification to the ticket
         )
-        
+
+
 class Notification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     notification_content = models.TextField()
     is_read = models.BooleanField(default=False)
 
+    # ForeignKey to link a notification to a user
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='notifications')
+
+    # ForeignKey to link a notification to a ticket (optional)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE,
+                               related_name='notifications', null=True, blank=True)
+
     class Meta:
         verbose_name = "Notification"
         verbose_name_plural = "Notifications"
-        
+
+    def mark_as_read(self):
+        self.is_read = True
+        self.save()
+
     def __str__(self):
         return f"{self.notification_content}"
 
@@ -163,6 +186,6 @@ class Report(models.Model):
     class Meta:
         verbose_name = "Report"
         verbose_name_plural = "Reports"
-        
+
     def __str__(self):
         return self.user.username

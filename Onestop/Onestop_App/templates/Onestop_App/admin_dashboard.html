@@ -239,13 +239,13 @@
   <body>
     <div class="sidebar">
       <a href="{% url 'Onestop_App:dashboard' %}"><i class="fas fa-home"></i>Home</a>
-      <a href="{% url "Onestop_App:add_course" %}"><i class="fas fa-plus"></i>Add Course</a>
-      <a href="viewqueries.html"><i class="fas fa-eye"></i>View Queries</a>
+      <a href="{% url 'Onestop_App:add_course' %}"><i class="fas fa-plus"></i>Add Course</a>
+      <a href="{% url 'Onestop_App:admin_queries' %}"><i class="fas fa-eye"></i>View Queries</a>
       <a href="createtimetable.html"><i class="fas fa-calendar-alt"></i>Create Timetable</a>
-      <a href="{% url "Onestop_App:add_faculty" %}"><i class="fas fa-user-plus"></i>Add Faculty</a>
-      <a href="{% url "Onestop_App:add_student" %}"><i class="fas fa-user-graduate"></i>Add Students</a>
+      <a href="{% url 'Onestop_App:add_faculty' %}"><i class="fas fa-user-plus"></i>Add Faculty</a>
+      <a href="{% url 'Onestop_App:add_student' %}"><i class="fas fa-user-graduate"></i>Add Students</a>
       <a href="{% url 'Onestop_App:add_section' %}"><i class="fas fa-th-list"></i>Add Sections</a>
-      <a href="viewnotifications.html"><i class="fas fa-bell"></i>View Notifications</a>
+      <a href="{% url 'Onestop_App:admin_notifications' %}"><i class="fas fa-bell"></i>View Notifications</a>
     </div>
     <div class="content-container">
       <div class="header">

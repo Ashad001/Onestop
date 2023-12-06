@@ -5,7 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 app_name = "Onestop_App"
 urlpatterns = [
-    path("", views.student_login, name="student_login"),
+    path(
+        "",
+        views.student_login,
+        name="student_login"
+    ),
     path(
         "create_query/",
         login_required(views.create_query),
@@ -32,7 +36,7 @@ urlpatterns = [
         name="student_logout",
     ),
     path(
-        "admin_dashboard/", 
+        "admin_dashboard/",
         admin_required(views.dashboard),
         name="dashboard"
     ),
@@ -67,8 +71,33 @@ urlpatterns = [
         name="add_section",
     ),
     path(
-        "chatbot/", 
-        views.chatbot_view, 
+        "admin_queries/",
+        admin_required(views.admin_queries),
+        name="admin_queries",
+    ),
+    path(
+        "admin_response/<int:ticket_id>/",
+        admin_required(views.admin_response),
+        name="admin_response",
+    ),
+    path(
+        "chatbot/",
+        login_required(views.chatbot_view),
         name="chatbot"
+    ),
+    path(
+        "admin_notifications/",
+        admin_required(views.admin_notifications),
+        name="admin_notifications"
+    ),
+    path(
+        'mark_notification_as_read/<int:notification_id>/',
+        admin_required(views.mark_notification_as_read),
+        name='mark_notification_as_read'
+    ),
+    path(
+        'ticket_detail/<int:ticket_id>/',
+        admin_required(views.ticket_detail), 
+        name='ticket_detail'
     ),
 ]
