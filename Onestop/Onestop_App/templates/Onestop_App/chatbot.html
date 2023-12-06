@@ -12,10 +12,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://drive.google.com/uc?id=1Qz3mtOvN9pjRztWZG16We6z1B2MDUJmL">
     <style>
       body {
-        font-family: 'Arial', sans-serif;
+        font-family: 'Quicksand', sans-serif;
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
@@ -60,7 +61,7 @@
       }
       
       .content-container {
-        margin-left: 220px; /* Adjusted for sidebar width */
+        margin-left: 200px; /* Adjusted for sidebar width */
         flex-grow: 1; /* Allow content to grow and fill remaining space */
       }
       
@@ -83,7 +84,7 @@
       }
       
       .header img {
-        max-width: 150px;
+        max-width: 100px;
         display: block;
         margin: 0 auto; /* Center the image */
       }
@@ -95,6 +96,10 @@
       }
       body.dark-mode h2 {
         color: #fff; /* Text color in dark mode */
+      }
+      p {
+          margin-top: 10px;
+          margin-left: 370px;
       }
       
       .logout-btn {
@@ -197,23 +202,169 @@
           opacity: 1;
         }
       }
+      @keyframes flip {
+        0% {
+          transform: rotateY(0deg);
+        }
+        50% {
+          transform: rotateY(180deg);
+        }
+        100% {
+          transform: rotateY(360deg);
+        }
+      }
+
+      .animated-word.flip {
+        animation: flip 2s linear 1.5;
+      }
+      #chat-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        position: relative;
+        
+      }
+      body.dark-mode #chat-container {
+        background-color: grey;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        position: relative;
+        
+      }
+
+      #chat-box {
+        min-height: 300px;
+        min-width: 500px;
+        overflow-y: auto;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #user-input {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
+      
+      #user-message {
+          flex-grow: 1;
+          padding: 8px;
+          border: 1px solid #007bff;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-right: 10px; /* Add margin to separate input and button */
+      }
+      
+      #user-input button {
+          background-color: #007bff;
+          color: #fff;
+          padding: 8px 16px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+      
+      #user-input button:hover {
+          background-color: #0056b3;
+      }
+      .bot {
+        background-color: #e0e0e0;
+        color: #000000;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+      }
+      
+      .user {
+          background-color: #007bff;
+          color: #fff;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+      }
+      .faq-bubbles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .faq-bubble {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 16px;
+        background-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s;
+        margin-right: 10px; /* Add margin between bubbles */
+      }
+      
+      .faq-bubble:hover {
+          background-color: #0056b3;
+      }
+    
+      #typed-output {
+        color: #007bff;
+        margin-top: 20px; /* Adjust the top margin according to your design */
+        margin-left: 280px;
+      }
+      body.dark-mode #typed-output {
+        color: #ffffff;
+        margin-top: 20px; /* Adjust the top margin according to your design */
+        margin-left: 280px;
+      }
+      #halo-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 50%;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    body.dark-mode #halo-bg {
+      background-color: #111; /* Dark mode background color for #bg */
+    }
+    
+    #halo-bg2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    
+    body.dark-mode #halo-bg2 {
+        background-color: /* Your dark mode background color for #bg2 */;
+    }
+    .sidebar a.active {
+      background-color: #007bff; /* Highlight color for active link */
+      color: #fff; /* Text color for active link */
+    }
     </style>
     <script>
-      // document.addEventListener('DOMContentLoaded', function () {
-      //     var options = {
-      //         strings: ["Aheed, Ashad, Haseeb Present"],
-      //         typeSpeed: 100,
-      //         showCursor: true,
-      //         cursorChar: '',
-      //         onComplete: function () {
-      //             function delayedFunction() {
-      //                 typed.destroy();
-      //             }
-      //             setTimeout(delayedFunction, 2000);
-      //         }
-      //     };
-      //     var typed = new Typed('#typed-output', options);
-      // });
+       document.addEventListener('DOMContentLoaded', function () {
+           var options = {
+               strings: ["Hey User!, Welcome to the OneStop Chatbot, Type Away!!"],
+               typeSpeed: 80,
+               showCursor: true,
+               cursorChar: '',
+               onComplete: function () {
+                    function delayedFunction() {
+                       typed.destroy();
+                   }
+                   setTimeout(delayedFunction, 7000);
+               }
+           };
+           var typed = new Typed('#typed-output', options);
+       });
       
       function toggleDarkMode() {
         const body = document.body
@@ -221,49 +372,117 @@
         body.classList.toggle('dark-mode', !darkMode)
         localStorage.setItem('darkMode', !darkMode ? 'enabled' : 'disabled')
         setLogoImage(!darkMode)
+        toggleBackground(!darkMode);
       }
       
       function setLogoImage(isDarkMode) {
         const logoImg = document.getElementById('logo-image')
-        logoImg.src = isDarkMode ? 'https://drive.google.com/uc?id=1DBXfLGIhCX7mTP782TS0u6OgAgx5jLYY' : 'https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes'
+        logoImg.src = isDarkMode ? 'https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz' : 'https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz'
       }
       
       window.onload = function () {
         const darkMode = localStorage.getItem('darkMode') === 'enabled'
         document.body.classList.toggle('dark-mode', darkMode)
         setLogoImage(darkMode)
+        {% comment %} sendMessage("Bot: Hello! How can I help you?"); {% endcomment %}
+        const inputBox = document.getElementById("user-message");
+        populateFAQBubbles(inputBox);
       }
+      function toggleBackground(isDarkMode) {
+        const bgElement = document.getElementById("halo-bg");
+        const bg2Element = document.getElementById("halo-bg2");
+    
+        if (isDarkMode) {
+            bgElement.style.display = "none";
+            bg2Element.style.display = "block";
+        } else {
+            bgElement.style.display = "block";
+            bg2Element.style.display = "none";
+        }
+      }
+    
     </script>
   </head>
 
   <body>
     <div class="sidebar">
-      <a href="{% url 'Onestop_App:create_query' %}"><i class="fas fa-pen"></i>Create A Query</a>
-      <a href="{% url 'Onestop_App:query_status' %}"><i class="fas fa-eye"></i>Query Status</a>
-      <a href="{% url 'Onestop_App:student_timetable' %}"><i class="fas fa-table"></i>Time Table</a>
-      <a href="{% url 'Onestop_App:chatbot'%}"><i class="fas fa-book"></i>FAQs</a>
+      <a href="{% url 'Onestop_App:student_dashboard' %}" class="{% if request.path == '/student_dashboard/' %}active{% endif %}">
+        <i class="fas fa-home"></i>Home
+    </a>
+      <a href="{% url 'Onestop_App:create_query' %}" class="{% if request.path == '/create_query/' %}active{% endif %}">
+          <i class="fas fa-pen"></i>Create A Query
+      </a>
+      <a href="{% url 'Onestop_App:query_status' %}" class="{% if request.path == '/query_status/' %}active{% endif %}">
+          <i class="fas fa-eye"></i>Query Status
+      </a>
+      <a href="{% url 'Onestop_App:student_timetable' %}" class="{% if request.path == '/student_timetable/' %}active{% endif %}">
+          <i class="fas fa-table"></i>Time Table
+      </a>
+      <a href="{% url 'Onestop_App:chatbot' %}" class="{% if request.path == '/chatbot/' %}active{% endif %}">
+          <i class="fas fa-book"></i>FAQs
+      </a>
     </div>
-
+    
     <div class="content-container">
       <div class="header">
-        <img id="logo-image" src="https://drive.google.com/uc?id=1BKk00uxKPeyxjYbvwz9OK2LaaAAvPRes" alt="OneStop Logo" />
-        <h1 class="sub-heading"><span id="typed-output"></span></h1>
+        <img id="logo-image" src="https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz" alt="OneStop Logo" />
+        
         <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
         <a href="{% url 'Onestop_App:student_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
       </div>
-      
-    <div id="chat-container">
+      <p>Frequently Asked Questions<span class="sub-heading"><span class="animated-word flip">A</span><span class="animated-word flip">u</span><span class="animated-word flip">t</span><span class="animated-word flip">o</span><span class="animated-word flip">m</span><span class="animated-word flip">a</span><span class="animated-word flip">t</span><span class="animated-word flip">e</span><span class="animated-word flip">d</span></p>
+      <h1 class="sub-heading" id="typed-output"></h1>
+      <div id="chat-container">
         <div id="chat-box"></div>
         <div id="user-input">
-            <input type="text" id="user-message" placeholder="Type your message...">
+          <input type="text" id="user-message" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()">Send</button>
         </div>
-    </div>
+        <div id="faq-bubbles" class="faq-bubbles"></div>
 
+
+    </div>
+    <div id="halo-bg"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
     <script>
-        function sendMessage() {
+    VANTA.HALO({
+      el: "#halo-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      backgroundColor: 0xe1e1e5,
+      size: 2.00
+    })
+    </script>
+    <div id="halo-bg2"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+    <script>
+    VANTA.HALO({
+      el: "#halo-bg2",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      baseColor: 0x1db6,
+      backgroundColor: 0x0,
+      size: 1.00
+    })
+    </script>
+    <script>
+        function sendMessage(message) {
+          {% comment %} if (message.trim() !== "") { {% endcomment %}
+            {% comment %} appendMessage(message, "bot"); {% endcomment %}
+          
             var userMessage = document.getElementById("user-message").value;
             appendMessage("You: " + userMessage, "user");
+            
+
+            
 
             // Send user input to the server
             fetch("/chatbot/", {
@@ -283,7 +502,8 @@
 
             // Clear user input field
             document.getElementById("user-message").value = "";
-        }
+        {% comment %} } {% endcomment %}
+      }
 
         function appendMessage(message, sender) {
             var chatBox = document.getElementById("chat-box");
@@ -291,8 +511,9 @@
             messageElement.className = sender;
             messageElement.innerHTML = message;
             chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
-
+        
         // Function to get CSRF token from cookies
         function getCookie(name) {
             var cookieValue = null;
@@ -309,6 +530,43 @@
             }
             return cookieValue;
         }
+        function handleKeyPress(event) {
+          if (event.key === "Enter") {
+              sendMessage();
+          }
+        }
+        function populateFAQBubbles(inputBox) {
+          const faqBubbles = document.getElementById("faq-bubbles");
+      
+          // Define FAQs
+          const faqs = ["what are the rules regarding attendance?", "WiFi isn't working", "Tell me about available scholarships", 
+          "How do I access transportation facilities?", "Can you provide information on the courses?", "I lost my cricket ball"];
+      
+          // Populate bubbles
+          faqs.forEach((faq, index) => {
+              const bubble = createFAQBubble(faq, inputBox);
+              faqBubbles.appendChild(bubble);
+          });
+        }
+      
+      
+      
+        
+        function createFAQBubble(text, inputBox) {
+          const bubble = document.createElement("div");
+          bubble.className = "faq-bubble";
+          bubble.textContent = text;
+      
+          // Add click event to set FAQ text in the input box
+          bubble.addEventListener("click", function () {
+              inputBox.value = text;
+          });
+      
+          return bubble;
+        }
+      
+      
     </script>
+    <div style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; font-size: 28px;" onclick="toggleDarkMode()">🌙</div>
 </body>
 </html>
