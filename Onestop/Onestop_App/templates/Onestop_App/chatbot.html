@@ -405,168 +405,179 @@
   </head>
 
   <body>
-    <div class="sidebar">
-      <a href="{% url 'Onestop_App:student_dashboard' %}" class="{% if request.path == '/student_dashboard/' %}active{% endif %}">
-        <i class="fas fa-home"></i>Home
-    </a>
-      <a href="{% url 'Onestop_App:create_query' %}" class="{% if request.path == '/create_query/' %}active{% endif %}">
-          <i class="fas fa-pen"></i>Create A Query
-      </a>
-      <a href="{% url 'Onestop_App:query_status' %}" class="{% if request.path == '/query_status/' %}active{% endif %}">
-          <i class="fas fa-eye"></i>Query Status
-      </a>
-      <a href="{% url 'Onestop_App:student_timetable' %}" class="{% if request.path == '/student_timetable/' %}active{% endif %}">
-          <i class="fas fa-table"></i>Time Table
-      </a>
-      <a href="{% url 'Onestop_App:chatbot' %}" class="{% if request.path == '/chatbot/' %}active{% endif %}">
-          <i class="fas fa-book"></i>FAQs
-      </a>
-    </div>
-    
-    <div class="content-container">
-      <div class="header">
-        <img id="logo-image" src="https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz" alt="OneStop Logo" />
-        
-        <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
-        <a href="{% url 'Onestop_App:student_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
+      <div class="sidebar">
+        <a href="{% url 'Onestop_App:student_dashboard' %}" class="{% if request.path == '/student_dashboard/' %}active{% endif %}">
+            <i class="fas fa-home"></i>Home
+        </a>
+        <a href="{% url 'Onestop_App:create_query' %}" class="{% if request.path == '/create_query/' %}active{% endif %}">
+            <i class="fas fa-pen"></i>Create A Query
+        </a>
+        <a href="{% url 'Onestop_App:query_status' %}" class="{% if request.path == '/query_status/' %}active{% endif %}">
+            <i class="fas fa-eye"></i>Query Status
+        </a>
+        <a href="{% url 'Onestop_App:student_notifications' %}" class="{% if request.path == '/student_notifications/' %}active{% endif %}">
+            <i class="fas fa-table"></i>Notifications
+        </a>
+        <a href="{% url 'Onestop_App:chatbot' %}" class="{% if request.path == '/chatbot/' %}active{% endif %}">
+            <i class="fas fa-book"></i>FAQs
+        </a>
       </div>
-      <p>Frequently Asked Questions<span class="sub-heading"><span class="animated-word flip">A</span><span class="animated-word flip">u</span><span class="animated-word flip">t</span><span class="animated-word flip">o</span><span class="animated-word flip">m</span><span class="animated-word flip">a</span><span class="animated-word flip">t</span><span class="animated-word flip">e</span><span class="animated-word flip">d</span></p>
-      <h1 class="sub-heading" id="typed-output"></h1>
-      <div id="chat-container">
-        <div id="chat-box"></div>
-        <div id="user-input">
-          <input type="text" id="user-message" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-        <div id="faq-bubbles" class="faq-bubbles"></div>
-
-
-    </div>
-    <div id="halo-bg"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
-    <script>
-    VANTA.HALO({
-      el: "#halo-bg",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      backgroundColor: 0xe1e1e5,
-      size: 2.00
-    })
-    </script>
-    <div id="halo-bg2"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
-    <script>
-    VANTA.HALO({
-      el: "#halo-bg2",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      baseColor: 0x1db6,
-      backgroundColor: 0x0,
-      size: 1.00
-    })
-    </script>
-    <script>
-        function sendMessage(message) {
-          {% comment %} if (message.trim() !== "") { {% endcomment %}
-            {% comment %} appendMessage(message, "bot"); {% endcomment %}
+      <div class="content-container">
+        <div class="header">
+          <img id="logo-image" src="https://drive.google.com/uc?id=1-5_u6eeeaq1wPORqmhRpgdO30JAj-Xbz" alt="OneStop Logo" />
           
-            var userMessage = document.getElementById("user-message").value;
-            appendMessage("You: " + userMessage, "user");
+          <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
+          <a href="{% url 'Onestop_App:student_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
+        </div>
+        <p>Frequently Asked Questions
+          <span class="sub-heading">
+            <span class="animated-word flip">A</span>
+            <span class="animated-word flip">u</span>
+            <span class="animated-word flip">t</span>
+            <span class="animated-word flip">o</span>
+            <span class="animated-word flip">m</span>
+            <span class="animated-word flip">a</span>
+            <span class="animated-word flip">t</span>
+            <span class="animated-word flip">e</span>
+            <span class="animated-word flip">d</span>
+          </span>
+        </p>
+        <h1 class="sub-heading" id="typed-output"></h1>
+        <div id="chat-container">
+          <div id="chat-box"></div>
+          <div id="user-input">
+            <input type="text" id="user-message" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+              <button onclick="sendMessage()">Send</button>
+          </div>
+          <div id="faq-bubbles" class="faq-bubbles"></div>
+
+
+      </div>
+      <div id="halo-bg"></div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+      <script>
+      VANTA.HALO({
+        el: "#halo-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        backgroundColor: 0xe1e1e5,
+        size: 2.00
+      })
+      </script>
+      <div id="halo-bg2"></div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+      <script>
+      VANTA.HALO({
+        el: "#halo-bg2",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        baseColor: 0x1db6,
+        backgroundColor: 0x0,
+        size: 1.00
+      })
+      </script>
+      <script>
+          function sendMessage(message) {
+            {% comment %} if (message.trim() !== "") { {% endcomment %}
+              {% comment %} appendMessage(message, "bot"); {% endcomment %}
             
+              var userMessage = document.getElementById("user-message").value;
+              appendMessage("You: " + userMessage, "user");
+              
 
-            
+              
 
-            // Send user input to the server
-            fetch("/chatbot/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-CSRFToken": getCookie('csrftoken')
-                },
-                body: "user_input=" + encodeURIComponent(userMessage),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Display chatbot response
-                appendMessage("Bot: " + data.result, "bot");
-            })
-            .catch(error => console.error("Error:", error));
+              // Send user input to the server
+              fetch("/chatbot/", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/x-www-form-urlencoded",
+                      "X-CSRFToken": getCookie('csrftoken')
+                  },
+                  body: "user_input=" + encodeURIComponent(userMessage),
+              })
+              .then(response => response.json())
+              .then(data => {
+                  // Display chatbot response
+                  appendMessage("Bot: " + data.result, "bot");
+              })
+              .catch(error => console.error("Error:", error));
 
-            // Clear user input field
-            document.getElementById("user-message").value = "";
-        {% comment %} } {% endcomment %}
-      }
-
-        function appendMessage(message, sender) {
-            var chatBox = document.getElementById("chat-box");
-            var messageElement = document.createElement("div");
-            messageElement.className = sender;
-            messageElement.innerHTML = message;
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
+              // Clear user input field
+              document.getElementById("user-message").value = "";
+          {% comment %} } {% endcomment %}
         }
-        
-        // Function to get CSRF token from cookies
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-        function handleKeyPress(event) {
-          if (event.key === "Enter") {
-              sendMessage();
+
+          function appendMessage(message, sender) {
+              var chatBox = document.getElementById("chat-box");
+              var messageElement = document.createElement("div");
+              messageElement.className = sender;
+              messageElement.innerHTML = message;
+              chatBox.appendChild(messageElement);
+              chatBox.scrollTop = chatBox.scrollHeight;
           }
-        }
-        function populateFAQBubbles(inputBox) {
-          const faqBubbles = document.getElementById("faq-bubbles");
-      
-          // Define FAQs
-          const faqs = ["what are the rules regarding attendance?", "WiFi isn't working", "Tell me about available scholarships", 
-          "How do I access transportation facilities?", "Can you provide information on the courses?", "I lost my cricket ball"];
-      
-          // Populate bubbles
-          faqs.forEach((faq, index) => {
-              const bubble = createFAQBubble(faq, inputBox);
-              faqBubbles.appendChild(bubble);
-          });
-        }
-      
-      
-      
+          
+          // Function to get CSRF token from cookies
+          function getCookie(name) {
+              var cookieValue = null;
+              if (document.cookie && document.cookie !== '') {
+                  var cookies = document.cookie.split(';');
+                  for (var i = 0; i < cookies.length; i++) {
+                      var cookie = cookies[i].trim();
+                      // Does this cookie string begin with the name we want?
+                      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                          break;
+                      }
+                  }
+              }
+              return cookieValue;
+          }
+          function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+          }
+          function populateFAQBubbles(inputBox) {
+            const faqBubbles = document.getElementById("faq-bubbles");
         
-        function createFAQBubble(text, inputBox) {
-          const bubble = document.createElement("div");
-          bubble.className = "faq-bubble";
-          bubble.textContent = text;
-      
-          // Add click event to set FAQ text in the input box
-          bubble.addEventListener("click", function () {
-              inputBox.value = text;
-          });
-      
-          return bubble;
-        }
-      
-      
-    </script>
-    <div style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; font-size: 28px;" onclick="toggleDarkMode()">🌙</div>
-</body>
+            // Define FAQs
+            const faqs = ["what are the rules regarding attendance?", "WiFi isn't working", "Tell me about available scholarships", 
+            "How do I access transportation facilities?", "Can you provide information on the courses?", "I lost my cricket ball"];
+        
+            // Populate bubbles
+            faqs.forEach((faq, index) => {
+                const bubble = createFAQBubble(faq, inputBox);
+                faqBubbles.appendChild(bubble);
+            });
+          }
+        
+        
+        
+          
+          function createFAQBubble(text, inputBox) {
+            const bubble = document.createElement("div");
+            bubble.className = "faq-bubble";
+            bubble.textContent = text;
+        
+            // Add click event to set FAQ text in the input box
+            bubble.addEventListener("click", function () {
+                inputBox.value = text;
+            });
+        
+            return bubble;
+          }
+        
+        
+      </script>
+      <div style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; font-size: 28px;" onclick="toggleDarkMode()">🌙</div>
+  </body>
 </html>

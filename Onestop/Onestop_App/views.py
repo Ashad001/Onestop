@@ -359,15 +359,24 @@ def admin_notifications(request):
 
     return render(request, 'Onestop_App/admin_notifications.html', {'notifications': notifications})
 
+
+def user_notifications(request):
+    notifications = Notification.objects.filter(user=request.user).order_by('-timestamp')
+    return render(request, 'Onestop_App/student_notifications.html', {'notifications': notifications})
+
+
 def mark_notification_as_read(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
     notification.mark_as_read()
 
-    # Assuming your Ticket model has a ForeignKey to Notification, adjust this part accordingly
-    ticket_id = notification.ticket.id  # Replace 'ticket' with the actual ForeignKey name in your Notification model
+    ticket_id = notification.ticket.id
 
     return redirect('Onestop_App:ticket_detail', ticket_id=ticket_id)
 
 def ticket_detail(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     return render(request, 'Onestop_App/ticket_detail.html', {'ticket': ticket})
+
+def ticket_det(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    return render(request, 'Onestop_App/ticket_det.html', {'ticket': ticket})

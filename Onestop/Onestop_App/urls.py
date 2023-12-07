@@ -100,4 +100,14 @@ urlpatterns = [
         admin_required(views.ticket_detail), 
         name='ticket_detail'
     ),
+    path(
+        "student_notifications/",
+        login_required(views.user_notifications),
+        name="student_notifications",
+    ),
+    path(
+        'ticket_det/<int:ticket_id>/',
+        login_required(views.ticket_det),
+        name='ticket_det',
+    )
 ]
