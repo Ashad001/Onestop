@@ -15,7 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="https://drive.google.com/uc?id=1Qz3mtOvN9pjRztWZG16We6z1B2MDUJmL" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet" />
-    
+    <audio id="successSound" src="https://drive.google.com/uc?id=1wpymEQ1uh8wmAU6gD-VLbAFZaUVdk2Ow"></audio>
+
     <style>
       body {
         font-family: 'Quicksand', sans-serif;
@@ -67,7 +68,7 @@
       }
       
       .content-container {
-        margin-left: 220px; /* Adjusted for sidebar width */
+        margin-left: 200px; /* Adjusted for sidebar width */
         flex-grow: 1; /* Allow content to grow and fill remaining space */
       }
       
@@ -259,12 +260,25 @@
         setLogoImage(darkMode)
       
         // Highlight current page's sidebar button
-        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const sidebarLinks = document.querySelectorAll('.sidebar a')
         sidebarLinks.forEach((link) => {
-          link.classList.remove('active');
+          link.classList.remove('active')
           if (link.href === window.location.href) {
-            link.classList.add('active');
+            link.classList.add('active')
           }
+        })
+        var successMessage = document.querySelector('.alert-success')
+        if (successMessage) {
+          var successSound = document.getElementById('successSound')
+          var successCheckMark = document.getElementById('successCheckMark')
+          successSound.play()
+          successCheckMark.style.display = 'block'
+      
+          // Set a timeout to hide the check mark after 2 seconds
+          setTimeout(function () {
+            successCheckMark.style.display = 'none'
+          }, 1000)
+        }
       }
     </script>
   </head>
@@ -349,7 +363,7 @@
           </div>
         </form>
 
-        <div class="mt-5">
+        <div class="mt-5" id="successMessageContainer">
           {% if messages %}
             <div class="alert alert-success" style="font-size: 0.8rem" role="alert">
               {% for message in messages %}
@@ -367,6 +381,8 @@
 
       <!-- Existing HTML code below this line -->
     </div>
+    <img id="successCheckMark" src="https://drive.google.com/uc?id=1_eep4-M_6vKrJO6X1G4TydEnCapuoenA" alt="Success" style="display: none; position: fixed; top: 50%; left: 57%; transform: translate(-50%, -50%); width: 100px; height: 100px;" />
+
     <div style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; font-size: 18px;" onclick="toggleDarkMode()">🌙</div>
   </body>
 </html>
