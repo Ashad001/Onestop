@@ -86,23 +86,23 @@ class Faculty(models.Model):
 class Appointment(models.Model):
     STATUS_CHOICES = [
         ('submitted', 'Submitted'),
-        ('schedule', 'Schedule'),
+        ('scheduled', 'Scheduled'),
         ('complete', 'Complete'),
-        ('in_progress', 'In Progress'),
     ]
     student = models.ForeignKey(
         Student, on_delete=models.CASCADE, related_name="appointments")
     timestamp = models.DateTimeField(auto_now_add=True)
+    appointment_date = models.DateTimeField(null=True, blank=True)
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default='submitted')
+    admin_notification_sent = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Appointment"
         verbose_name_plural = "Appointments"
 
     def __str__(self):
-        return self.student.nuid | self.status
-
+        return f"{self.student.nuid} | {self.status}"
 
 class Ticket(models.Model):
     STATUS_CHOICES = [
@@ -136,22 +136,23 @@ class Ticket(models.Model):
         return f"{self.student.nuid} | {self.status} | {self.service}"
 
 
-@receiver(post_save, sender=Ticket)
-def send_ticket_notification(sender, instance, created, **kwargs):
+@receiver(post_save, sender=Appointment)
+def send_appointment_notification(sender, instance, created, **kwargs):
     if created:
         admin_user = User.objects.get(username='haseeb')  # Replace 'admin' with the actual admin username
 
-        notification_content = f"New ticket submitted: {instance.service} by {instance.student.nuid}"
+        notification_content = f"New appointment scheduled by {instance.student.nuid}"
 
-        # Create a Notification instance linked to the admin user
+        # Create a Notification instance linked to the admin user and the appointment
         Notification.objects.create(
             notification_content=notification_content,
             is_read=False,
             user=admin_user,
-            ticket=instance,  # Link the notification to the ticket
+            appointment=instance,  # Link the notification to the appointment
         )
-
-
+    
+    Appointment.objects.filter(id=instance.id).update(admin_notification_sent=True)
+    
 class Notification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     notification_content = models.TextField()
@@ -164,6 +165,9 @@ class Notification(models.Model):
     # ForeignKey to link a notification to a ticket (optional)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE,
                                related_name='notifications', null=True, blank=True)
+    
+    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE,
+                                    related_name='notifications', null=True, blank=True)
 
     class Meta:
         verbose_name = "Notification"

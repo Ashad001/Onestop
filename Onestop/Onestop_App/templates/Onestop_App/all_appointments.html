@@ -246,6 +246,7 @@
       <a href="{% url 'Onestop_App:add_student' %}"><i class="fas fa-user-graduate"></i>Add Students</a>
       <a href="{% url 'Onestop_App:add_section' %}"><i class="fas fa-th-list"></i>Add Sections</a>
       <a href="{% url 'Onestop_App:admin_notifications' %}"><i class="fas fa-bell"></i>View Notifications</a>
+      <a href="{% url 'Onestop_App:all_appointments' %}"><i class="fas fa-calendar-check"></i>View Appointments</a>
     </div>
     <div class="content-container">
       <div class="header">
@@ -254,26 +255,22 @@
         <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
         <a href="{% url 'Onestop_App:admin_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
       </div>
-      <div class="content">
-        <h2>Admin Notifications</h2>
-        <ul>
-          {% for notification in notifications %}
-            <li>
-              {% if not notification.is_read %}
-                {% if notification.ticket %}
-                  {{ notification.notification_content }}
-                  (<a href="{% url 'Onestop_App:mark_notification_as_read' notification.id %}">Mark as Read</a>)
-                {% elif notification.appointment %}
-                  {{ notification.notification_content }}
-                  (<a href="{% url 'Onestop_App:change_appointment_status' notification.appointment.id %}">Change Appointment Status</a>)
-                {% endif %}
-              {% else %}
-                {{ notification.notification_content }}
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
+      <div class="d-flex justify-content-center my-3">
+        <div class="alert alert-primary" style="width: 800px;" role="alert">
+          For advanced CRUD functionality, please use the <a href="/admin/">Django Admin Panel</a>.
+        </div>
       </div>
+    </div>
+    <div class="content d-flex align-items-center flex-column">
+      <h1>All Appointments</h1>
+
+      <ul>
+        {% for appointment in appointments %}
+          <li>
+            <a href="{% url 'Onestop_App:appointment_detail' appointment.id %}">Appointment #{{ appointment.id }} - {{ appointment.appointment_date }}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   </body>
 </html>

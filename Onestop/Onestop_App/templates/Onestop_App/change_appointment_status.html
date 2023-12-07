@@ -254,26 +254,16 @@
         <h1 class="sub-heading"><span class="animated-word">Digitalized</span> OneStop</h1>
         <a href="{% url 'Onestop_App:admin_logout' %}"><button class="logout-btn" type="submit">Log Out</button></a>
       </div>
-      <div class="content">
-        <h2>Admin Notifications</h2>
-        <ul>
-          {% for notification in notifications %}
-            <li>
-              {% if not notification.is_read %}
-                {% if notification.ticket %}
-                  {{ notification.notification_content }}
-                  (<a href="{% url 'Onestop_App:mark_notification_as_read' notification.id %}">Mark as Read</a>)
-                {% elif notification.appointment %}
-                  {{ notification.notification_content }}
-                  (<a href="{% url 'Onestop_App:change_appointment_status' notification.appointment.id %}">Change Appointment Status</a>)
-                {% endif %}
-              {% else %}
-                {{ notification.notification_content }}
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+      <html lang="en">
+        <body>
+          <h2>Change Appointment Status</h2>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+          </form>
+        </body>
+      </html>
     </div>
   </body>
 </html>

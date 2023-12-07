@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from Onestop_App.models import User, Student, Faculty, Section, Course, Ticket, Notification
+from Onestop_App.models import User, Student, Faculty, Section, Course, Ticket, Notification, Appointment
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
@@ -322,3 +322,15 @@ class ResponseForm(forms.Form):
         required=True
     )
     
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['appointment_date']
+        widgets = {
+            'appointment_date': forms.TextInput(attrs={'type': 'datetime-local'}),
+        }
+        
+class ChangeAppointmentStatusForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['status']

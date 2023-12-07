@@ -124,3 +124,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'Onestop_App.User'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'digitalized.onestop@gmail.com'
+EMAIL_HOST_PASSWORD = 'stbrrvujobltfaro'
+EMAIL_USE_TLS = True

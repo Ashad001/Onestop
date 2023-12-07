@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm, TicketForm, ResponseForm
+from .forms import AdministrationLoginForm, StudentForm, FacultyForm,CourseForm,SectionForm, StudentLoginForm, TicketForm, ResponseForm,AppointmentForm,ChangeAppointmentStatusForm
 from django.contrib import messages
 from django import forms
 from .models import Ticket, Notification, User
 from .chatbot import process_begin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
+from .models import Appointment
 
 # Create your views here.
 
@@ -162,12 +164,17 @@ def admin_logout(request):
     logout(request)
     return redirect("Onestop_App:admin_login")
 
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 def add_student(request):
     if request.method == "POST":
         student_Form = StudentForm(request.POST)
         if student_Form.is_valid():
             try:
-                student_Form.save()
+                student = student_Form.save()
+                send_student_creation_email(student)
                 messages.success(
                     request, "Student profile successfully created"
                 )
@@ -180,7 +187,7 @@ def add_student(request):
                 {"student_Form": StudentForm(), },
             )
         else:
-            messages.error(request, "Something is not quiite right (。_。)")
+            messages.error(request, "Something is not quite right (。_。)")
 
             return render(
                 request,
@@ -193,6 +200,19 @@ def add_student(request):
             "Onestop_App/add_student.html",
             {"student_Form": StudentForm(), },
         )
+
+def send_student_creation_email(student):
+    subject = 'Welcome to OneStop App'
+    recipient_email = student.user.email
+    context = {'username': student.user.username, 'password': student.user.password}  # Replace '*****' with the actual password
+
+    # Pass context as the second argument to render_to_string
+    html_message = render_to_string('Onestop_App/email_welcome.html', context)
+    plain_message = strip_tags(html_message)
+
+    # Send the email
+    send_mail(subject, plain_message, 'digitalized.onestop@gmail.com', [recipient_email], html_message=html_message)
+
 
 def add_faculty(request):
     if request.method == "POST":
@@ -359,11 +379,9 @@ def admin_notifications(request):
 
     return render(request, 'Onestop_App/admin_notifications.html', {'notifications': notifications})
 
-
 def user_notifications(request):
     notifications = Notification.objects.filter(user=request.user).order_by('-timestamp')
     return render(request, 'Onestop_App/student_notifications.html', {'notifications': notifications})
-
 
 def mark_notification_as_read(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
@@ -380,3 +398,44 @@ def ticket_detail(request, ticket_id):
 def ticket_det(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     return render(request, 'Onestop_App/ticket_det.html', {'ticket': ticket})
+
+def schedule_appointment(request):
+    if request.method == 'POST':
+        appointment_Form = AppointmentForm(request.POST)
+        if appointment_Form.is_valid():
+            appointment = appointment_Form.save(commit=False)
+            appointment.student = request.user.student
+            appointment.status = 'submitted'
+            appointment.appointment_date = appointment_Form.cleaned_data['appointment_date']
+            appointment.save()
+            
+            messages.success(request, 'Appointment scheduled successfully.')
+            return redirect('Onestop_App:student_dashboard')
+    else:
+        appointment_Form = AppointmentForm()
+
+    return render(request, 'Onestop_App/schedule_appointment.html', {'appointment_Form': appointment_Form})
+
+def all_appointments(request):
+    appointments = Appointment.objects.all()
+
+    return render(request, 'Onestop_App/all_appointments.html', {'appointments': appointments})
+
+def appointment_detail(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    
+    return render(request, 'Onestop_App/appointment_detail.html', {'appointment': appointment})
+
+def change_appointment_status(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    if request.method == 'POST':
+        form = ChangeAppointmentStatusForm(request.POST, instance=appointment)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Appointment status changed successfully.')
+            return redirect('Onestop_App:admin_notifications')
+    else:
+        form = ChangeAppointmentStatusForm(instance=appointment)
+
+    return render(request, 'Onestop_App/change_appointment_status.html', {'form': form, 'appointment': appointment})

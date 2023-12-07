@@ -109,5 +109,25 @@ urlpatterns = [
         'ticket_det/<int:ticket_id>/',
         login_required(views.ticket_det),
         name='ticket_det',
-    )
+    ),
+    path(
+        'schedule_appointment/',
+        login_required(views.schedule_appointment),
+        name='schedule_appointment',
+    ),
+    path(
+        'change_appointment_status/<int:appointment_id>/', 
+        admin_required(views.change_appointment_status), 
+        name='change_appointment_status'
+    ),
+    path(
+        'all_appointments/', 
+        admin_required(views.all_appointments), 
+        name='all_appointments'
+    ),
+    path(
+        'appointment_detail/<int:appointment_id>/', 
+        admin_required(views.appointment_detail), 
+        name='appointment_detail'
+    ),
 ]

@@ -293,6 +293,9 @@
         <a href="{% url 'Onestop_App:chatbot' %}" class="{% if request.path == '/chatbot/' %}active{% endif %}">
             <i class="fas fa-book"></i>FAQs
         </a>
+        <a href="{% url 'Onestop_App:schedule_appointment' %}" class="{% if request.path == '/schedule_appointment/' %}active{% endif %}">
+            <i class="fas fa-calendar"></i>Schedule Appointment
+        </a>
     </div>
     
     <div class="content-container">
