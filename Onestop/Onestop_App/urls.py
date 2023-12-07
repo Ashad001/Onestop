@@ -106,6 +106,11 @@ urlpatterns = [
         name="student_notifications",
     ),
     path(
+        "createtimetable/",
+        admin_required(views.createtimetable),
+        name="createtimetable",
+    ),
+    path(
         'ticket_det/<int:ticket_id>/',
         login_required(views.ticket_det),
         name='ticket_det',

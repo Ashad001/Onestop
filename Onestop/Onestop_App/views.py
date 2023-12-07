@@ -319,6 +319,11 @@ def chatbot_view(request):
 
     return render(request, "Onestop_App/chatbot.html")
 
+def createtimetable(request):
+    
+
+    return render(request, "Onestop_App/createtimetable.html")
+
 def admin_queries(request):
     all_tickets = Ticket.objects.all()
     tickets_per_page = 10
