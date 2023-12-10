@@ -57,13 +57,13 @@ Welcome to Python project! This guide will walk you through the process of setti
 
 1. In the Root directory run the following command:
    ```bash
-   python3 tobeupdated/manage.py migrate
-   python3 tobeupdated/manage.py runserver
+   python3 Onestop/manage.py migrate
+   python3 Onestop/manage.py runserver
    ```
    OR
    ```
-   py tobeupdated/manage.py migrate
-   py tobeupdated/manage.py runserver
+   py Onestop/manage.py migrate
+   py Onestop/manage.py runserver
    ```
 2. Visit http://localhost:8000/ to access the platform.
 
