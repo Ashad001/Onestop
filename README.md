@@ -10,7 +10,7 @@ Welcome to Python project! This guide will walk you through the process of setti
 4. Run the following command to clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/DevHire-Extended.git
+   git clone https://github.com/your-username/Onestop.git
    ```
 
    Replace `your-username` with your GitHub username.
